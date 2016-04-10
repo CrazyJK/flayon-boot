@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Users - JPA Demo</title>
+</head>
+<body>
+<h1>User list by Thymeleaf</h1>
+
+<table>
+	<tr th:each="user : ${userList}">
+	    <td th:text="${user.name}">Name</td>	
+	</tr> 
+</table>
+
+</body>
+</html>
