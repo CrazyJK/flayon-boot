@@ -1,5 +1,7 @@
 package jk.crazy.flay.demo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,5 +47,9 @@ public class DemoController {
 		return "redirect:/demo/users/all";
 	}
 	
+	@RequestMapping("/users")
+    public @ResponseBody List<User> users() {
+		return userRepository.findAll();
+	}
 	
 }
