@@ -1,12 +1,12 @@
-package jk.crazy.demo;
+package jk.crazy.flay;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoJpaApplication {
+public class FlayApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoJpaApplication.class, args);
+		SpringApplication.run(FlayApplication.class, args);
 	}
 }

@@ -1,4 +1,4 @@
-package jk.crazy.demo;
+package jk.crazy.flay;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
@@ -7,7 +7,7 @@ public class ServletInitializer extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(DemoJpaApplication.class);
+		return application.sources(FlayApplication.class);
 	}
 
 }

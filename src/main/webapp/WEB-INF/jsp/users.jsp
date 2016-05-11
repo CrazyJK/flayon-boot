@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8"></meta>
-<title>Users - JPA Demo</title>
+<title>Users - Flay Demo</title>
 </head>
 <body>
 <h1>User list by jsp</h1>
@@ -16,6 +16,8 @@
 	</tr> 
 	</c:forEach>
 </table>
+<c:url value="/demo/users/add" var="addUser" />
+<a href="${addUser}">add user</a>
 
 </body>
 </html>

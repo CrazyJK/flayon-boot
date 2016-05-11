@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>jk.crazy.demo</groupId>
-	<artifactId>jpa</artifactId>
+	<groupId>jk.crazy</groupId>
+	<artifactId>flay</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>demo-jpa</name>
-	<description>Demo project for Spring Boot</description>
+	<name>flay-in-home</name>
+	<description>flay in home with girls</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -24,24 +24,15 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-        	<groupId>mysql</groupId>
-         	<artifactId>mysql-connector-java</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.16.6</version>
-		</dependency>
+		<!-- spring boot -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
@@ -51,6 +42,18 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<!-- <dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-devtools</artifactId>
+        	<optional>true</optional>
+    	</dependency> -->
+    
+		<!-- lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.6</version>
 		</dependency>
 
 		<!-- jsp -->
@@ -62,8 +65,7 @@
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<scope>provided</scope>
-		</dependency>		
-		
+		</dependency>				
 		<!-- Velocity
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -75,7 +77,22 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-		 -->		 
+		 -->
+		 
+		 <!-- H2 -->
+		 <dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- mysql connector -->
+		<!-- 
+		<dependency>
+        	<groupId>mysql</groupId>
+         	<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		 -->
+
 	</dependencies>
 	
 	<build>

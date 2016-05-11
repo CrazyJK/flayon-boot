@@ -1,6 +1,4 @@
-package jk.crazy.demo.controller;
-
-import java.util.List;
+package jk.crazy.flay.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,22 +8,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import jk.crazy.demo.domain.User;
-import jk.crazy.demo.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@RequestMapping("/")
-public class MainController {
+@RequestMapping("/demo")
+@Slf4j
+public class DemoController {
 
 	@Autowired private UserRepository userRepository;
 
 	@RequestMapping
     public @ResponseBody String index() {
-        return "Hello Woniper Spring Boot~";
+		log.debug("call");
+        return "Hello crazy Spring Boot~";
     }
 	
 	@RequestMapping("/users/{name}")
 	public String getUserList(Model model, @PathVariable String name) {
+		log.debug("call {}", name);
 		if (StringUtils.isEmpty(name) || "all".equalsIgnoreCase(name))
 			model.addAttribute(userRepository.findAll());
 		else
@@ -33,15 +33,16 @@ public class MainController {
 		return "users";
 	}
 	
-	@RequestMapping("/addusers")
-	public @ResponseBody List<User> addUserList() {
+	@RequestMapping("/users/add")
+	public String addUserList() {
+		log.debug("call add user");
 		User user = new User();
 		user.setName("kamoru" + Double.valueOf(Math.random() * 100).intValue());
 		user.setAge(Double.valueOf(Math.random() * 100).intValue());
 		
 		userRepository.save(user);
 		
-		return userRepository.findByNameLike("kamoru%");
+		return "redirect:/demo/users/all";
 	}
 	
 	

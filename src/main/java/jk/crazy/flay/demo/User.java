@@ -1,4 +1,4 @@
-package jk.crazy.demo.domain;
+package jk.crazy.flay.demo;
 
 import java.io.Serializable;
 
