@@ -1,2 +1,2 @@
-insert into user(name, age) values ('woniper1', 26);
-insert into user(name, age) values ('woniper2', 27);
+insert into USER(name, password) values ('kamoru', '1');
+insert into USER(name, password) values ('hhj', '28');

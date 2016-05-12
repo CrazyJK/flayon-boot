@@ -1,0 +1,8 @@
+<header layout:fragment="header">
+  <p th:text="|Hello common header fragment (${name})!|">header fragment</p>
+  <ul>
+  	<li><a href="/user/list" data-th-href="@{/user/list}">List</a></li>
+  	<li><a href="/user/users" data-th-href="@{/user/users}">Users</a></li>
+  	<li><a href="/user/new" data-th-href="@{/user/new}">New User</a></li>
+  </ul>
+</header>

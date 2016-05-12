@@ -1,4 +1,4 @@
-package jk.crazy.flay.demo;
+package jk.crazy.flay.security;
 
 import java.util.List;
 

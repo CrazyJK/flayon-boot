@@ -1,4 +1,4 @@
-package jk.crazy.flay.demo;
+package jk.crazy.flay.security;
 
 import java.io.Serializable;
 
@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import lombok.Data;
 
@@ -21,8 +24,10 @@ public class User implements Serializable {
 	private Long id;
 	
 	@Column(name = "name", nullable = false)
+	@NotEmpty
 	private String name;
+		
+	@NotEmpty
+	private String password;
 	
-	@Column(name = "age", nullable = false)
-	private Integer age;
 }
