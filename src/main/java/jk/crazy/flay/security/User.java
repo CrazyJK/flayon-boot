@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -24,10 +25,16 @@ public class User implements Serializable {
 	private Long id;
 	
 	@Column(name = "name", nullable = false)
-	@NotEmpty
+	@Size(min=2, max=30)
 	private String name;
 		
 	@NotEmpty
 	private String password;
 	
+	@NotNull
+	private String role;
+	
+	enum Role {
+		USER, ADMIN;
+	}
 }

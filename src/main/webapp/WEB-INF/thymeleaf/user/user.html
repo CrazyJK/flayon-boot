@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-layout-decorator="layout/default">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Users - Flayon</title>
+<script type="text/javascript">
+function fnDelete() {
+	var hiddenMethod = document.getElementById("hiddenMethod");
+	hiddenMethod.value = "DELETE";
+	fnSubmit();	
+}
+function fnSave() {
+	var hiddenMethod = document.getElementById("hiddenMethod");
+	hiddenMethod.value = "POST";
+	fnSubmit();	
+}
+function fnUpdate() {
+	var hiddenMethod = document.getElementById("hiddenMethod");
+	hiddenMethod.value = "POST";
+	fnSubmit();	
+}
+function fnSubmit() {
+	document.forms[0].submit();
+}
+</script>
+</head>
+<body>
+<section class="container" data-layout-fragment="content">
+
+<div class="page-header">
+	<h1>User Info ...</h1>
+</div>
+<p>
+	<a data-th-href="@{/user}" class="btn btn-xs btn-default">Users</a>
+	<a onclick="fnSave()"   data-th-if="!${user.id}" class="btn btn-xs btn-success">Save</a>
+	<a onclick="fnUpdate()" data-th-if="${user.id}" class="btn btn-xs btn-success">Update</a>
+	<a onclick="fnDelete()" data-th-if="${user.id}" class="btn btn-xs btn-warning">Delete</a>
+</p>
+<div class="row">
+	<div class="col-md-12">		
+		<form data-th-object="${user}" method="post">
+			<input type="hidden" id="hiddenMethod" name="_method" value="PUT"/>
+			<table class="table table-bordered">
+				<tr>
+					<th width="100px">Name</th>
+					<td><input th:field="*{name}" placeholder="log in name"/>
+						<span class="form-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span></td>
+				</tr>
+				<tr>
+					<th>Secret</th>
+					<td><input type="password" name="password" th:value="*{password}" placeholder="password"/>
+						<span class="form-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password Error</span></td>
+				</tr>
+				<tr>
+					<th>Role</th>
+					<td>
+						<span th:each="rl : ${allRoles}" style="margin-right:10px;">
+							<input type="radio" th:field="*{role}" th:value="${rl}"/>
+							<label th:for="${#ids.prev('role')}" th:text="${rl}">role</label>
+						</span>
+						<span class="form-error" th:if="${#fields.hasErrors('role')}" th:errors="*{role}">Role Error</span></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>
+
+
+</section>
+</body>
+</html>

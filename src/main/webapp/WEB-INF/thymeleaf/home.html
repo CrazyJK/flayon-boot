@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-layout-decorator="layout/default">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Home - Flayon</title>
+</head>
+<body>
+<section data-layout-fragment="content" th:inline="text">
+
+	<div class="jumbotron">
+		<h1>Welcome! [[${#httpServletRequest.remoteUser}]]!</h1>
+	
+		<p>Click <a th:href="@{/user}">here</a> to see users.</p>
+		<p>Click <a th:href="@{/h2console}">here</a> to see H2 console</p>
+	</div>
+
+</section>
+</body>
+</html>

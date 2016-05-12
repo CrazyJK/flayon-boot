@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-layout-decorator="layout/default"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/3.3.6/dist/css/bootstrap.min.css}"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" th:href="@{/webjars/bootstrap/3.3.6/dist/css/bootstrap-theme.min.css}"/>
+<link rel="stylesheet" type="text/css" media="screen" href="/css/signin.css" th:href="@{/css/signin.css}" />
+<title>Login - Flayon</title>
+</head>
+<body>
+<div class="container" data-layout-fragment="content">
+
+	<form class="form-signin" method="post">
+    	<h2 class="form-signin-heading">Please sign in</h2>
+       	<label for="inputName" class="sr-only">Name</label>
+       	<input type="text" id="inputName" name="username" class="form-control" placeholder="Your name" required="" autofocus=""/>
+       	<label for="inputPassword" class="sr-only">Password</label>
+       	<input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required=""/>
+       	<div class="checkbox">
+         	<label><input type="checkbox" name="_spring_security_remember_me" value="remember-me"/> Remember me</label>
+       	</div>
+       	<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+		<div th:if="${param.error}">Invalid username and password.</div>
+		<div th:if="${param.logout}">You have been logged out.</div>
+     </form>
+
+</div>
+</body>
+</html>

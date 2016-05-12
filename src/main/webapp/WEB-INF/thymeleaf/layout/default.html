@@ -1,21 +1,29 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-<title>Spring Boot and Thymeleaf - Thymeleaf Layout Dialect</title>
 <meta charset="UTF-8" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="../../css/common.css" th:href="@{/css/default.css}" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/3.3.6/dist/css/bootstrap.min.css}"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" th:href="@{/webjars/bootstrap/3.3.6/dist/css/bootstrap-theme.min.css}"/>
+<link rel="stylesheet" type="text/css" media="screen" href="/css/common.css" th:href="@{/css/common.css}" />
+<title>Spring Boot and Thymeleaf - Thymeleaf Layout Dialect</title>
 </head>
-<body>
-	<header th:replace="fragments/header :: header">
+<body role="document">
+	<header th:replace="fragments/header :: nav">
 		<p>This is default header area for default layout</p>
 	</header>
-	<section id="content" layout:fragment="content">
+	
+	<section layout:fragment="content" class="container">
 		<p th:text="${'Hello ' + name + '!'}"></p>
 		<p>This is default main content with default layout</p>
 	</section>
+	
 	<footer th:replace="fragments/footer :: footer">
 		<p>This is default footer area for default layout</p>
 	</footer>
+
+<script src="/webjars/jQuery/2.2.3/dist/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.6/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

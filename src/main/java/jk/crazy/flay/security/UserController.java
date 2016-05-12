@@ -63,15 +63,22 @@ public class UserController {
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public String getUserList(Model model, @PathVariable Long id) {
 		log.debug("call {}", id);
-		model.addAttribute(userRepository.findOne(id));
+		if (id == 0) {
+			model.addAttribute(new User());
+		}
+		else {
+			model.addAttribute(userRepository.findOne(id));
+		}
+		model.addAttribute("allRoles", User.Role.values());
 		return DetailView;
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.POST)
-	public String editUser(@Valid User user, BindingResult result, @PathVariable Long id) {
+	public String editUser(@Valid User user, BindingResult result, @PathVariable Long id, Model model) {
 		log.debug("edit user {}", user);
 		if (result.hasErrors()) {
 			log.debug("edit user : valid error. {}", result);
+			model.addAttribute("allRoles", User.Role.values());
 			return DetailView;
 		}
 		userRepository.save(user);

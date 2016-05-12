@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-layout-decorator="layout/default">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Users - Flayon</title>
+<script type="text/javascript" th:inline="javascript">
+var user = /*[[${bootUserList}]]*/ null;
+</script>
+</head>
+<body>
+<div class="container" role="main" data-layout-fragment="content">
+      
+<div class="page-header">
+	<h1>User list ...<span class="badge" data-th-text="${#lists.size(userList)}">1</span></h1>
+</div>
+<p>
+	<a href="#" data-th-href="@{/user/0}" class="btn btn-xs btn-info">New User</a>
+</p>
+<div class="row">
+	<div class="col-md-8">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Name</th>
+					<th>Password</th>
+					<th>Role</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-th-if="${#lists.isEmpty(userList)}">
+					<td></td>
+					<td>No data</td>
+				</tr>
+				<tr th:each="user : ${userList}" data-th-class="${userStat.odd}? 'odd'">
+					<td data-th-text="${userStat.count}">1</td>
+				    <td><a href="/user/1" data-th-href="@{'/user/' + ${user.id}}" data-th-text="${user.name}">Name</a></td>
+				    <td data-th-text="${user.password}">password</td>
+				    <td data-th-text="${user.role}">role</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+</div>
+</body>
+</html>

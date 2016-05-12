@@ -1,3 +1,61 @@
+<nav class="navbar navbar-default navbar-fixed-top" data-layout-fragment="header">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Flayon</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a data-th-href="@{/}">Home</a></li>
+        <li><a href="#about">Video</a></li>
+        <li><a href="/user">Picture</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            Utility
+            <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li class="dropdown-header">manage menu</li>
+            <li><a href="#">Request Mapping</a></li>
+            <li><a href="#">hit messageCode</a></li>
+            <li><a href="#">Web attribute</a></li>
+            <li><a href="#">Thread dump</a></li>
+            <li><a href="#">Log view</a></li>
+            <li><a href="#">JK Servlet</a></li>
+            <li><a href="#">Error</a></li>
+            <li class="divider"></li>
+            <li class="dropdown-header">util menu</li>
+            <li><a href="#">Standard color</a></li>
+            <li><a href="#">Port scan</a></li>
+          </ul>
+        </li>
+        <li class="dropdown" sec:authorize="isAuthenticated()">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            <span sec:authentication="name">Username</span>
+            <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">User Profile</a></li>
+            <li><a data-th-href="@{/logout}">Log out</a></li>
+            <li class="divider" sec:authorize="hasAuthority('ADMIN')"></li>
+            <li class="dropdown-header" sec:authorize="hasAuthority('ADMIN')">admin menu</li>
+            <li><a data-th-href="@{/user}" sec:authorize="hasAuthority('ADMIN')">Users</a></li>
+            <li><a data-th-href="@{/h2console}" target="_blank" sec:authorize="hasAuthority('ADMIN')">H2 Console</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+<!-- 
+<form action="/logout" th:action="@{/logout}" method="post">
+	<input type="submit" value="Sign Out"/>
+</form>
+
 <header layout:fragment="header">
   <p th:text="|Hello common header fragment (${name})!|">header fragment</p>
   <ul>
@@ -6,3 +64,4 @@
   	<li><a href="/user/new" data-th-href="@{/user/new}">New User</a></li>
   </ul>
 </header>
+ -->
