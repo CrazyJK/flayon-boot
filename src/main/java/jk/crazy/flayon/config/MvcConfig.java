@@ -1,4 +1,4 @@
-package jk.crazy.flay.config;
+package jk.crazy.flayon.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;

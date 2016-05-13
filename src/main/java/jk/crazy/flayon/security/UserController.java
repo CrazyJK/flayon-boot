@@ -1,8 +1,10 @@
-package jk.crazy.flay.security;
+package jk.crazy.flayon.security;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,13 +22,16 @@ public class UserController {
 	
 	private static final String ListView = "user/list";
 	private static final String DetailView = "user/user";
+	private static final String ProfileView = "user/profile";
 	private static final String Redirect_List = "redirect:/user";
 	
 	@Autowired private UserRepository userRepository;
 
+	@Value("${jk.crazy.flayon}") String flayon;
+	
 	@RequestMapping
     public String list(Model model) {
-		log.debug("list");
+		log.debug("list in {}", flayon);
 		model.addAttribute(userRepository.findAll());
 		return ListView;
     }
@@ -91,7 +96,24 @@ public class UserController {
 		userRepository.delete(id);
 		return Redirect_List;
 	}
+
+	@RequestMapping("/profile")
+	public String profile(Model model, @AuthenticationPrincipal FlayOnUser flayonUser) {
+		log.debug("profile userdetails {}", flayonUser); 
+		model.addAttribute(flayonUser.getUser());
+		return ProfileView;
+	}
 	
+	@RequestMapping(value="/profile", method=RequestMethod.POST)
+	public String editProfile(@Valid User user, BindingResult result) {
+		log.debug("edit profile {}", user);
+		if (result.hasErrors()) {
+			log.debug("edit profile : valid error. {}", result);
+			return ProfileView;
+		}
+		userRepository.save(user);
+		return ProfileView;
+	}
 	
 	@RequestMapping("/add")
 	public String addUserList() {

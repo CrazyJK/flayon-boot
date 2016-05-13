@@ -3,9 +3,6 @@
 <head>
 <meta charset="UTF-8"></meta>
 <title>Users - Flayon</title>
-<script type="text/javascript" th:inline="javascript">
-var user = /*[[${bootUserList}]]*/ null;
-</script>
 </head>
 <body>
 <div class="container" role="main" data-layout-fragment="content">
@@ -21,7 +18,7 @@ var user = /*[[${bootUserList}]]*/ null;
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>#</th>
+					<th th:text="#{jk.crazy}">#</th>
 					<th>Name</th>
 					<th>Password</th>
 					<th>Role</th>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-layout-decorator="layout/default">
+<head>
+<meta charset="UTF-8"></meta>
+<title>User Profile - Flayon</title>
+</head>
+<body>
+<section class="container" data-layout-fragment="content">
+
+<div class="page-header">
+	<h1>User Profile ...</h1>
+</div>
+	
+<div class="row">
+	<div class="col-md-12">		
+		<form data-th-object="${user}" method="post">
+			<p><button type="submit" class="btn btn-xs btn-success">Update</button></p>
+			<input th:field="*{id}" type="hidden"/>
+			<table class="table table-bordered">
+				<tr>
+					<th width="100px">Name</th>
+					<td><input th:field="*{name}" readonly="readonly" class="readonly"/></td>
+				</tr>
+				<tr>
+					<th>Password</th>
+					<td><input type="password" name="password" th:value="*{password}" placeholder="password"/>
+						<span class="form-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password Error</span></td>
+				</tr>
+				<tr>
+					<th>Role</th>
+					<td><input th:field="*{role}" readonly="readonly"/></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>
+
+</section>
+</body>
+</html>

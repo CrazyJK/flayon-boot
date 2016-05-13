@@ -11,7 +11,7 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a data-th-href="@{/}">Home</a></li>
+        <li><a data-th-href="@{/}">Home</a></li>
         <li><a href="#about">Video</a></li>
         <li><a href="/user">Picture</a></li>
         <li class="dropdown">
@@ -33,12 +33,14 @@
             <li><a href="#">Port scan</a></li>
           </ul>
         </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
         <li class="dropdown" sec:authorize="isAuthenticated()">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
             <span sec:authentication="name">Username</span>
             <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">User Profile</a></li>
+            <li><a th:href="@{/user/profile}">User Profile</a></li>
             <li><a data-th-href="@{/logout}">Log out</a></li>
             <li class="divider" sec:authorize="hasAuthority('ADMIN')"></li>
             <li class="dropdown-header" sec:authorize="hasAuthority('ADMIN')">admin menu</li>

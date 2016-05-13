@@ -1,4 +1,4 @@
-package jk.crazy.flay.security;
+package jk.crazy.flayon.security;
 
 import java.util.List;
 
