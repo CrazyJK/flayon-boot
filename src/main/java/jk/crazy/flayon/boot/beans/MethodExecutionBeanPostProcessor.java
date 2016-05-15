@@ -1,4 +1,4 @@
-package jk.crazy.flayon.beans;
+package jk.crazy.flayon.boot.beans;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
  * Method execution BeanPostProcessor
  * <p>빈 생성후 설정에의해 채택된 메서드를 수행한다.
  * <pre>
- * &lt;bean class="{@link jk.kamoru.spring.MethodExecutionBeanPostProcessor}" &gt;
+ * &lt;bean class="{@link jk.crazy.flayon.boot.beans.kamoru.spring.MethodExecutionBeanPostProcessor}" &gt;
  *   &lt;-- need to property 'beans' of Map type. {key=beanName, value=methodName} --&gt;
  *   &lt;property name="beans"&gt; 
  *     &lt;map&gt;

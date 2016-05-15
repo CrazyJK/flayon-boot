@@ -1,10 +1,10 @@
-package jk.crazy.flayon.beans;
+package jk.crazy.flayon.boot.beans;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import jk.crazy.flayon.security.User;
-import jk.crazy.flayon.security.UserRepository;
+import jk.crazy.flayon.boot.security.User;
+import jk.crazy.flayon.boot.security.UserRepository;
 
 @Component
 public class MethodExecutionSample {

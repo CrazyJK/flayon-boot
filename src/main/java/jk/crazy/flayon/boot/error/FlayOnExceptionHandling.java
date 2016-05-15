@@ -1,4 +1,4 @@
-package jk.crazy.flayon.exception;
+package jk.crazy.flayon.boot.error;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

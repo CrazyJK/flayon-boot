@@ -1,12 +1,12 @@
-package jk.crazy.flayon.config;
+package jk.crazy.flayon.boot.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import jk.crazy.flayon.aop.HandlerAccessLogger;
-import jk.crazy.flayon.aop.HandlerAccessLogger.WHEN;
+import jk.crazy.flayon.boot.aop.HandlerAccessLogger;
+import jk.crazy.flayon.boot.aop.HandlerAccessLogger.WHEN;
 
 @Configuration
 public class MvcConfig extends WebMvcConfigurerAdapter {

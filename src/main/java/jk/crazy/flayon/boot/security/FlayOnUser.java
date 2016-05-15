@@ -1,12 +1,14 @@
-package jk.crazy.flayon.security;
+package jk.crazy.flayon.boot.security;
 
 import java.util.Arrays;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import jk.crazy.flayon.boot.FlayOnApplication;
+
 public class FlayOnUser extends org.springframework.security.core.userdetails.User {
 
-	private static final long serialVersionUID = -167697137631555257L;
+	private static final long serialVersionUID = FlayOnApplication.SERIAL_VERSION_UID;
 
 	private User user;
 

@@ -1,4 +1,4 @@
-package jk.crazy.flayon.scheduling;
+package jk.crazy.flayon.boot.scheduling;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

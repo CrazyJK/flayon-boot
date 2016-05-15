@@ -1,4 +1,4 @@
-package jk.crazy.flayon.security;
+package jk.crazy.flayon.boot.security;
 
 import java.io.Serializable;
 
@@ -12,13 +12,14 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import jk.crazy.flayon.boot.FlayOnApplication;
 import lombok.Data;
 
 @Entity
 @Data
 public class User implements Serializable {
 
-	private static final long serialVersionUID = 588L;
+	private static final long serialVersionUID = FlayOnApplication.SERIAL_VERSION_UID;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

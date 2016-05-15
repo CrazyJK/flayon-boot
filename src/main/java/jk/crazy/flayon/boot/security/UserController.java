@@ -1,4 +1,4 @@
-package jk.crazy.flayon.security;
+package jk.crazy.flayon.boot.security;
 
 import javax.validation.Valid;
 
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import jk.crazy.flayon.exception.FlayOnException;
+import jk.crazy.flayon.boot.error.FlayOnException;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller

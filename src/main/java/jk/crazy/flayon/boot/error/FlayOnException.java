@@ -1,6 +1,6 @@
-package jk.crazy.flayon.exception;
+package jk.crazy.flayon.boot.error;
 
-import jk.crazy.flayon.FlayOnApplication;
+import jk.crazy.flayon.boot.FlayOnApplication;
 
 public class FlayOnException extends RuntimeException {
 
