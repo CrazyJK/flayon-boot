@@ -8,10 +8,10 @@
 <section data-layout-fragment="content" th:inline="text">
 
 	<div class="jumbotron">
-		<h1>Welcome! <span sec:authorize="isAuthenticated()" th:text="|${#httpServletRequest.remoteUser}!|"></span></h1>
+		<h1><b th:text="#{jk.crazy}">Welcome!</b> <span sec:authorize="isAuthenticated()" th:text="|${#httpServletRequest.remoteUser}!|"></span></h1>
 	
-		<p>Click <a th:href="@{/user}">here</a> to see users.</p>
-		<p>Click <a th:href="@{/h2console}">here</a> to see H2 console</p>
+		<p th:text="#{home.favorites.wording1}">home.favorites.wording</p>
+		<p th:text="#{home.favorites.wording2}">home.favorites.wording</p>
 	</div>
 
 </section>

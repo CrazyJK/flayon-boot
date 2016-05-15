@@ -22,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http
 			.authorizeRequests()
-				.antMatchers("/", "/error", "/webjars/**", "/css/**").permitAll()
+				.antMatchers("/", "/error", "/webjars/**", "/css/**", "/img/**").permitAll()
 				.antMatchers("/user/**").hasAuthority("ADMIN")
 				.anyRequest().authenticated()
 				.and()
@@ -31,11 +31,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()
 				.and()
 			.logout()
+				.logoutSuccessUrl("/")
 				.permitAll();
 		super.configure(http);
 	}
-	
-	
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {

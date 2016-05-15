@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-layout-decorator="layout/default">
+<head>
+<meta charset="utf-8"/>
+<title>FlayOn Error</title>
+</head>
+<body>
+<div class="container" data-layout-fragment="content">
+
+	<div class="jumbotron">
+	    <h1>FlayOn Error</h1>
+	    <p th:text="${flayOnException.message}">Sorry, but there was an error with the server that prevented this page from being displayed.</p>
+	</div>
+
+</div>
+</body>
+</html>

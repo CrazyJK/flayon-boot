@@ -25,13 +25,15 @@ ref
 
 
 ## todo
-
-* @ControllerAdvice : 에러처리에 쓰는듯한데 길다...
-* error 페이지 구성
-* AOP
 * watch service
+
+
+## done
+* 로그아웃 후 홈으로 가도록
+* @ControllerAdvice : 나의 특정 에러만 처리
+* /error 페이지 구성 : 기본 Whitelabel 대신에 error.html 로 대체
+* AOP : method interceptor, handler interceptor
+* BeanPostProcessor : jk.crazy.flayon.beans.MethodExecutionBeanPostProcessor
 * log 설정 : 기본 로그 좋은데, method만 더 나오게 하자. 기본패턴을 찾자. ref) http://logback.qos.ch/manual/layouts.html
-
- 
-
+             logback-spring.xml
 

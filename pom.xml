@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>jk.crazy</groupId>
-	<artifactId>flay</artifactId>
+	<artifactId>flayon</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>flay-in-home</name>
-	<description>flay in home with girls</description>
+	<name>flayon home</name>
+	<description>flayon home with ...</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

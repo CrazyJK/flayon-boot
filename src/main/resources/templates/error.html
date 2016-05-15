@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-layout-decorator="layout/default">
+<head>
+<meta charset="utf-8"/>
+<title>Server Error</title>
+</head>
+<body>
+<div class="container" data-layout-fragment="content">
+
+	<div class="jumbotron" th:inline="text">
+	    <h1>[[${error}]]</h1>
+	    <p>[[${status}]] [[${exception}]]</p>
+	    <p th:text="${message}">Sorry, but there was an error with the server that prevented this page from being displayed.</p>
+	    <div id='created'>[[${timestamp}]]</div>
+	</div>
+
+</div>
+</body>
+</html>
