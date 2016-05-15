@@ -1,5 +1,6 @@
 package jk.crazy.flayon.beans;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
@@ -30,6 +31,8 @@ public class MethodExecutionBeanPostProcessor implements BeanPostProcessor {
 
 	private Map<String, String> beans;
 
+	private static int count = 0;
+
 	/**
 	 * set bean infomation. {key = beanName, value = methodName}
 	 * 
@@ -38,6 +41,7 @@ public class MethodExecutionBeanPostProcessor implements BeanPostProcessor {
 	public void setBeans(Map<String, String> beans) {
 		Assert.notNull(beans, "'beans' must not be null");
 		this.beans = beans;
+		log.info("BeanPostProcess set beans {}", beans);
 	}
 
 	@Override
@@ -48,23 +52,20 @@ public class MethodExecutionBeanPostProcessor implements BeanPostProcessor {
 
 	@Override
 	public Object postProcessAfterInitialization(Object bean, String beanName) {
-//		log.debug("postProcessAfterInitialization {}", beanName);
+		if (beans == null)
+			return bean;
 		if (beans.keySet().contains(beanName)) {
 			String methodName = beans.get(beanName);
-			try {
-				log.info("attempt to invoke {}.{}", beanName, methodName);
-//				log.debug(" class : {}", bean.getClass());
-//				for (Method method : bean.getClass().getMethods()) {
-//					log.debug("  method : {}", method.getName());
-//				}
+			log.info("BeanPostProcess {} attempt to invoke {}.{}", ++count, beanName, methodName);
 
+			try {
 				Method method = bean.getClass().getDeclaredMethod(methodName);
 				method.invoke(bean);
-				log.info("completed to invoke {}.{}", beanName, methodName);
-			} catch (Exception e) {
-				log.error("method invocation error", e);
-				throw new RuntimeException("method invocation error", e);
+			} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+				log.error("BeanPostProcess error", e);
 			}
+			
+			log.info("BeanPostProcess {} completed to invoke {}.{}", count, beanName, methodName);
 		}
 		return bean;
 	}

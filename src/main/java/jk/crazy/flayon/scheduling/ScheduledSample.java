@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Component
-public class SchedulingSample {
+public class ScheduledSample {
 	
 	@Scheduled(fixedDelay = 1000 * 60 * 5)
 	public void iAmAlive() {
