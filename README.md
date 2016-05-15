@@ -25,7 +25,6 @@ ref
 
 
 ## todo
-* async : watch service
 
 
 ## done
@@ -36,4 +35,5 @@ ref
 * BeanPostProcessor : jk.crazy.flayon.beans.MethodExecutionBeanPostProcessor
 * log 설정 : 기본 로그 좋은데, method만 더 나오게 하자. 기본패턴을 찾자. ref) http://logback.qos.ch/manual/layouts.html
              logback-spring.xml
+* async : watch service
 
