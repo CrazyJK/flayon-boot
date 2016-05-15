@@ -1,4 +1,4 @@
-package jk.crazy.flayon.boot.config;
+package jk.kamoru.flayon.boot.config;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,7 +7,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import jk.crazy.flayon.boot.beans.MethodExecutionBeanPostProcessor;
+import jk.kamoru.flayon.boot.beans.MethodExecutionBeanPostProcessor;
 
 @Configuration
 public class FlayOnConfig {

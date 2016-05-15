@@ -1,4 +1,4 @@
-package jk.crazy.flayon.boot.aop;
+package jk.kamoru.flayon.boot.aop;
 
 import java.util.Arrays;
 

@@ -1,10 +1,10 @@
-package jk.crazy.flayon.boot.security;
+package jk.kamoru.flayon.boot.security;
 
 import java.util.Arrays;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import jk.crazy.flayon.boot.FlayOnApplication;
+import jk.kamoru.flayon.boot.FlayOnApplication;
 
 public class FlayOnUser extends org.springframework.security.core.userdetails.User {
 

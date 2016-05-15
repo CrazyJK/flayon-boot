@@ -1,4 +1,4 @@
-package jk.crazy.flayon.boot.security;
+package jk.kamoru.flayon.boot.security;
 
 import java.io.Serializable;
 
@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import jk.crazy.flayon.boot.FlayOnApplication;
+import jk.kamoru.flayon.boot.FlayOnApplication;
 import lombok.Data;
 
 @Entity

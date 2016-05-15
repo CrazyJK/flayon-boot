@@ -1,4 +1,4 @@
-package jk.crazy.flayon.boot.scheduling;
+package jk.kamoru.flayon.boot.scheduling;
 
 import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
 import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;

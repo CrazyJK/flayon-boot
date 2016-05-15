@@ -1,4 +1,4 @@
-package jk.crazy.flayon.boot.security;
+package jk.kamoru.flayon.boot.security;
 
 import java.util.List;
 

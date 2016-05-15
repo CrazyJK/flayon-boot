@@ -1,4 +1,4 @@
-package jk.crazy.flayon.boot;
+package jk.kamoru.flayon.boot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 //@SpringBootApplication
 @Configuration
 @EnableAutoConfiguration
-@ComponentScan(basePackages = "jk.crazy.flayon")
+@ComponentScan(basePackages = "jk.kamoru.flayon.boot")
 @EnableScheduling
 @EnableAspectJAutoProxy
 @EnableAsync

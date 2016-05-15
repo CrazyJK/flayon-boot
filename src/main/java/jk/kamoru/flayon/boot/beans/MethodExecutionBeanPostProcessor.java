@@ -1,4 +1,4 @@
-package jk.crazy.flayon.boot.beans;
+package jk.kamoru.flayon.boot.beans;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

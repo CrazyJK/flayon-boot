@@ -1,3 +1,3 @@
 
-${AnsiColor.RED}  :: Flay on home :: ${AnsiColor.BRIGHT_BLACK}${spring-boot.formatted-version}
+${AnsiColor.RED}  :: Flay on boot :: ${AnsiColor.BRIGHT_BLACK}${spring-boot.formatted-version}
 ${application.title} ${application.formatted-version}${AnsiColor.BLACK}

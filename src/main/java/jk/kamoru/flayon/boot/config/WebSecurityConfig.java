@@ -1,4 +1,4 @@
-package jk.crazy.flayon.boot.config;
+package jk.kamoru.flayon.boot.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import jk.crazy.flayon.boot.security.UserDetailsServiceImpl;
+import jk.kamoru.flayon.boot.security.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
