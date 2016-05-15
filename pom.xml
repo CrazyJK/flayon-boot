@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>jk.crazy</groupId>
-	<artifactId>flayon</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>flayon-boot</artifactId>
+	<version>1.0.1</version>
 	<packaging>jar</packaging>
 
-	<name>flayon home</name>
-	<description>flayon home with ...</description>
+	<name>flayon boot</name>
+	<description>flayon boot with spring boot</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
