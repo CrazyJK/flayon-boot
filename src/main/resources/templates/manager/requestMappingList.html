@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-layout-decorator="layout/default">
+<head>
+<meta charset="UTF-8"></meta>
+<title>RequestMapping List"/></title>
+<style type="text/css">
+table {
+	font-size:0.8em; width:100%;
+}
+tr:hover {
+	background-color:rgba(255,165,0,.25);
+}
+th {
+	background-color:rgba(255,165,0,.5);
+}
+td {
+	font-family: "나눔고딕코딩";
+}
+* [onclick] {
+	cursor:pointer;
+}
+* [onclick]:hover {
+	color:orange; 
+	text-decoration:none; 
+	text-shadow:1px 1px 1px black;
+}
+.selected {
+	color: blue;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function() {
+	var sort = location.search.split("=")[1]; 
+	if (sort == 'M')
+		$("#M").addClass("selected");
+	else if (sort == 'C')
+		$("#C").addClass("selected");
+	else
+		$("#P").addClass("selected");
+});
+function fnSort(sort) {
+	location.href= "?sort=" + sort;
+}
+</script>
+</head>
+<body>
+<div class="container" role="main" data-layout-fragment="content">
+	<div class="row">
+		<div class="col-md-8">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th align="center">	No</th>
+						<th align="left">	<span id="P" onclick="fnSort('P')">Pattern</span></th>
+						<th align="center">	<span id="M" onclick="fnSort('M')">Method</span></th>
+						<th align="right">	<span id="C" onclick="fnSort('C')">Class</span></th>
+						<th align="left">	Method</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="mapping : ${mappingList}">
+						<td align="center" th:text="${mappingStat.count}">#</td>
+						<td align="left"   th:text="${mapping.reqPattern}">reqPattern</td>
+						<td align="center" th:text="${mapping.reqMethod}">reqMethod</td>
+						<td align="right"  th:text="${mapping.beanType}">beanType</td>
+						<td align="left"   th:text="${mapping.beanMethod}">beanMethod</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+</body>
+</html>

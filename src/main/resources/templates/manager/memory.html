@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-layout-decorator="layout/default">
+<head>
+<meta charset="utf-8" />
+<title th:text="|Memory : #{html.title}|">Memory info</title>
+<style type="text/css">
+.right {
+	text-align: right;
+}
+section > article {
+	margin-left: 20px;
+}
+</style>
+</head>
+<body>
+<div class="container" role="main" data-layout-fragment="content">
+
+	<div class="page-header">
+		<h1>JVM Memory</h1>
+	</div>
+
+	<div class="row">
+		<div class="col-md-8">
+			<table class="table table-bordered">
+				<tr>
+					<th>Area</th>
+					<th>Init (MB)</th>
+					<th>Used (MB)</th>
+					<th>Commit (MB)</th>
+					<th>Max (MB)</th>
+					<th>Used(%)</th>
+				</tr>
+				<tr>
+					<td>Heap</td>
+					<td class="right" th:text="${#numbers.formatInteger(heap.init / 1024 / 1024, 0, 'DEFAULT')}">init</td>
+					<td class="right" th:text="${#numbers.formatInteger(heap.used / 1024 / 1024, 0, 'DEFAULT')}">user</td>
+					<td class="right" th:text="${#numbers.formatInteger(heap.committed / 1024 / 1024, 0, 'DEFAULT')}">max</td>
+					<td class="right" th:text="${#numbers.formatInteger(heap.max / 1024 / 1024, 0, 'DEFAULT')}">max</td>
+					<td class="right" th:text="|${#numbers.formatDecimal(heapUsedPercent, 0, 1)} %|">percent</td>
+				</tr>
+				<tr>
+					<td>Non Heap</td>
+					<td class="right" th:text="${#numbers.formatInteger(nonHeap.init / 1024 / 1024, 0, 'DEFAULT')}">init</td>
+					<td class="right" th:text="${#numbers.formatInteger(nonHeap.used / 1024 / 1024, 0, 'DEFAULT')}">user</td>
+					<td class="right" th:text="${#numbers.formatInteger(nonHeap.committed / 1024 / 1024, 0, 'DEFAULT')}">max</td>
+					<td class="right" th:text="${#numbers.formatInteger(nonHeap.max / 1024 / 1024, 0, 'DEFAULT')}">max</td>
+					<td class="right" th:text="|${#numbers.formatDecimal(nonHeapUsedPercent, 0, 1)} %|">percent</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div th:text="|Heap : ${heap}|"></div>
+	<div th:text="|Non-Heap : ${nonHeap}|"></div>
+</div>
+</body>
+</html>

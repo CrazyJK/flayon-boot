@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-layout-decorator="layout/default">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Standard colors</title>
+<style type="text/css">
+#colors {
+	margin: 10px;
+}
+/* #color div {
+	display:inline-block;
+	width:100px; height:100px;
+	text-shadow: 1px 1px 1px white;
+	border-radius: 10px;
+	text-align: center;
+} */
+.colordvcon {
+	display: inline-block;
+	margin: 3px 1px;
+	text-align: center;
+	font-family: Courier,monospace;
+	padding: 6px;
+	width: 132px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+.colordva {
+	height: 120px;
+	width: 120px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+</style>
+</head>
+<body>
+<div class="container" role="main" data-layout-fragment="content">
+
+	<h3>If you see custom color, input parameter by <code>?c=rgba(123,123,123,0.5)</code></h3>
+	<div id="colors" th:with="colors=${#arrays.toArray({'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'orange', 'purple', 'red', 'silver', 'teal', 'white', 'yellow'})}">
+		<div class="colordvcon" th:each="color : ${colors}">
+			<div class="colordva" th:style="|background-color: ${color}"></div>
+			<code th:text="${color}">color</code>
+		</div>
+		<div class="colordvcon">
+			<div class="colordva" th:style="|background-color: ${param.c[0]}"></div>
+			<code th:text="${param.c[0]}">rgba</code>
+		</div>
+	</div>
+	
+	<div class="alert alert-info" role="alert">
+		Find more color <a href="http://www.color-hex.com/" target="_blank">www.color-hex.com</a>
+	</div>
+
+</div>
+</body>
+</html>
