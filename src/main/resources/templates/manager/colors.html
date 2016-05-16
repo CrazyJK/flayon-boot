@@ -41,7 +41,7 @@
 			<div class="colordva" th:style="|background-color: ${color}"></div>
 			<code th:text="${color}">color</code>
 		</div>
-		<div class="colordvcon">
+		<div class="colordvcon" th:if="${param.containsKey('c')}">
 			<div class="colordva" th:style="|background-color: ${param.c[0]}"></div>
 			<code th:text="${param.c[0]}">rgba</code>
 		</div>

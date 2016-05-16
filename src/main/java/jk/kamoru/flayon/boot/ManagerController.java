@@ -103,6 +103,12 @@ public class ManagerController {
 		return "manager/colors";
 	}
 	
+	@RequestMapping("/portscan")
+	public String portscan() {
+		
+		return "manager/portscan";
+	}
+	
 	
 	String substringBetween(String str, String open, String close) {
         if (str == null || open == null || close == null) {
