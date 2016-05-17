@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-layout-decorator="layout/default">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Web Contexts</title>
+<style type="text/css">
+.code-name {}
+.code-value {}
+.code-clazz {color:teal}
+</style>
+</head>
+<body>
+<div class="container" role="main" data-layout-fragment="content">
+
+	<header class="page-header">
+		<h1>Web Attribute List</h1>
+	</header>
+
+	<section class="panel panel-info">
+		<header class="panel-heading">
+			<h3 class="panel-title">Session attributes</h3>
+		</header>
+		<div class="panel-body">
+			<ol>
+				<li th:each="entry : ${session.entrySet()}">
+					<dl>
+						<dt class="code-name" th:text="${entry.key}">name</dt>
+						<dd class="code-value" th:text="${entry.value}">value</dd>
+						<dd class="code-clazz" th:text="${entry.value.class.name}">clazz</dd>
+					</dl>
+				</li>
+			</ol>
+		</div>
+	</section>
+
+	<section class="panel panel-info">
+		<header class="panel-heading">
+			<h3 class="panel-title">Application attributes</h3>
+		</header>
+		<div class="panel-body">
+			<ol>
+				<li th:each="entry : ${application.entrySet()}">
+					<dl>
+						<dt class="code-name" th:text="${entry.key}">name</dt>
+						<dd class="code-value" th:text="${entry.value}">value</dd>
+						<dd class="code-clazz" th:text="${entry.value.class.name}">clazz</dd>
+					</dl>
+				</li>
+			</ol>
+		</div>
+	</section>
+
+</div>
+</body>
+</html>

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import jk.kamoru.flayon.boot.error.FlayOnException;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -128,8 +127,4 @@ public class UserController {
 		return Redirect_List;
 	}
 	
-	@RequestMapping("/error")
-	public void flayonError() {
-		throw new FlayOnException("flayon error message", new RuntimeException());
-	}
 }

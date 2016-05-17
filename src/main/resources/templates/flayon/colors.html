@@ -7,13 +7,6 @@
 #colors {
 	margin: 10px;
 }
-/* #color div {
-	display:inline-block;
-	width:100px; height:100px;
-	text-shadow: 1px 1px 1px white;
-	border-radius: 10px;
-	text-align: center;
-} */
 .colordvcon {
 	display: inline-block;
 	margin: 3px 1px;
@@ -35,7 +28,10 @@
 <body>
 <div class="container" role="main" data-layout-fragment="content">
 
-	<h3>If you see custom color, input parameter by <code>?c=rgba(123,123,123,0.5)</code></h3>
+	<div class="page-header">
+		<h1>Color palette</h1>
+		<h3>If you want to see custom color, input parameter by <a href="?c=rgba(123,123,123,0.5)">?c=rgba(123,123,123,0.5)</a></h3>
+ 	</div>
 	<div id="colors" th:with="colors=${#arrays.toArray({'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'orange', 'purple', 'red', 'silver', 'teal', 'white', 'yellow'})}">
 		<div class="colordvcon" th:each="color : ${colors}">
 			<div class="colordva" th:style="|background-color: ${color}"></div>

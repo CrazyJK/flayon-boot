@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-layout-decorator="layout/default">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Thread dump</title>
+<style type="text/css">
+p {
+	margin:0 10px;
+}
+</style>
+</head>
+<body>
+<div class="container" role="main" data-layout-fragment="content">
+
+	<div class="page-header">
+		<h1>Thread Info ...<span class="badge" data-th-text="${#lists.size(threadInfos)}"></span></h1>
+	</div>
+	
+	<section class="panel panel-info">
+		<header class="panel-heading">
+			<form method="get" th:object="${paramInfo}">
+				Show only what thread name starts with <input type="text" name="name" th:value="*{name}"/> and thread state is 
+				<select name="state" th:field="*{state}">
+					<option value="">All</option>
+					<option th:each="_state : ${threadStates}" th:text="${_state}" th:value="${_state}"></option>
+				</select>
+				<button type="submit" class="btn btn-sm btn-success">View</button>
+				<div th:if="!${#strings.isEmpty(paramInfo.name)} or !${#strings.isEmpty(paramInfo.state)} or *{threadId} > 0">
+					<a th:href="@{?}">Show all threads</a>
+				</div>
+			</form>
+		</header>
+		<div class="panel-body">
+			<div class="list-group">
+				<div class="list-group-item" th:each="threadInfo : ${threadInfos}">
+					<h4 class="list-group-item-heading">
+						<b th:text="|${threadInfo.threadName} ${threadInfo.threadState}|">name state</b> - 
+						<a th:href="@{?(threadId=${threadInfo.threadId})}" th:text="${threadInfo.threadId}">id</a>
+					</h4>
+					<div class="list-group-item-text">
+						<p th:each="stackTrace : ${threadInfo.stackTrace}" th:text="${stackTrace}"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</div>
+</body>
+</html>
