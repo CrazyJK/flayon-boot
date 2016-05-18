@@ -21,7 +21,7 @@
 	display: none;
 }
 input, textarea {
-	background-color:rgba(0,0,0,0);
+	/* background-color:rgba(0,0,0,0); */
 	border:0;
 }
 label {
@@ -33,27 +33,25 @@ label {
 <div class="container" role="main" data-layout-fragment="content">
 
 	<div class="page-header">
-		<h1>Port scanner</h1>
+		<h1>Port Scanner</h1>
  	</div>
  	
- 	<div class="row">
- 		<div class="col-sm-8">
- 		
+
  	<form>
  	<div class="panel panel-info">
  		<div class="panel-heading">
- 		<h3 class="panel-title">
-	 		<label>IP Address
-	 			<input name="ip" size="11" th:value="${ip}" placeHolder="ip address"/></label>
-	 		<label>Port from
-	 			<input name="ports" size="5" th:value="${ports}" placeHolder="port"/></label>
-	 		<label>to
-	 			<input name="porte" size="5" th:value="${porte}" placeHolder="port"/></label>
-	 		<button class="btn btn-sm btn-success" style="float:right" type="submit">Scan</button>
- 		</h3>
+	 		<h3 class="panel-title">
+		 		<label>IP Address
+		 			<input name="ip" size="11" th:value="${ip}" placeHolder="ip address"/></label>
+		 		<label>Port from
+		 			<input name="ports" size="5" th:value="${ports}" placeHolder="port"/></label>
+		 		<label>to
+		 			<input name="porte" size="5" th:value="${porte}" placeHolder="port"/></label>
+		 		<button class="btn btn-sm btn-success" style="float:right" type="submit">Scan</button>
+	 		</h3>
  		</div>
  		<div class="panel-body">
- 		<textarea name="portArr" style="width:100%; height:100px;" placeHolder="ex. 8080, 8081, 8082" th:text="${portArr}"></textarea>
+	 		<textarea name="portArr" style="width:100%; height:100px;" placeHolder="ex. 8080, 8081, 8082" th:text="${portArr}"></textarea>
 		</div>
 	</div>
  	</form>
@@ -66,9 +64,6 @@ label {
 	 		<span th:each="result : ${results}" class="result-li" th:classappend="${result[2]} ? 'result-listen' : 'result-close'" th:text="${result[1]}">result</span>
 		</div>
 	</div>
-
- 		</div>
- 	</div>
 
 </div>
 </body>

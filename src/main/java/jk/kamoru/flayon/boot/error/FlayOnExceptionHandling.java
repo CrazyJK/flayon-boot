@@ -10,8 +10,8 @@ public class FlayOnExceptionHandling {
 
 	@ExceptionHandler(value = FlayOnException.class)
 	public ModelAndView exception(FlayOnException exception, WebRequest request) {
-		ModelAndView modelAndView = new ModelAndView("error/flayon");
-		modelAndView.addObject(exception);
+		ModelAndView modelAndView = new ModelAndView("error/flayonError");
+		modelAndView.addObject("exception", exception);
 		return modelAndView;
 	}
 

@@ -13,6 +13,14 @@
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+<script src="/webjars/jQuery/2.2.3/dist/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.6/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('h1').animate({opacity: .1}, "slow");
+	$('h1').animate({opacity:  1}, "slow");
+});
+</script>
 </head>
 <body role="document">
 	<header th:replace="fragments/header :: nav">
@@ -28,13 +36,5 @@
 		<p>This is default footer area for default layout</p>
 	</footer>
 
-<script src="/webjars/jQuery/2.2.3/dist/jquery.min.js"></script>
-<script src="/webjars/bootstrap/3.3.6/dist/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-	$('h1').animate({opacity: .1}, "slow");
-	$('h1').animate({opacity:  1}, "slow");
-});
-</script>
 </body>
 </html>

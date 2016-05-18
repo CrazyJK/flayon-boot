@@ -24,7 +24,7 @@ p {
 					<option value="">All</option>
 					<option th:each="_state : ${threadStates}" th:text="${_state}" th:value="${_state}"></option>
 				</select>
-				<button type="submit" class="btn btn-sm btn-success">View</button>
+				<button type="submit" class="btn btn-sm btn-success" style="float:right">View</button>
 				<div th:if="!${#strings.isEmpty(paramInfo.name)} or !${#strings.isEmpty(paramInfo.state)} or *{threadId} > 0">
 					<a th:href="@{?}">Show all threads</a>
 				</div>

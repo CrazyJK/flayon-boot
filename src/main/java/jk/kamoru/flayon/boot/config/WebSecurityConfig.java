@@ -22,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http
 			.authorizeRequests()
-				.antMatchers("/", "/error", "/webjars/**", "/css/**", "/img/**").permitAll()
+				.antMatchers("/", "/error", "/webjars/**", "/css/**", "/img/**", "/js/**").permitAll()
 				.antMatchers("/user/**").hasAuthority("ADMIN")
 				.anyRequest().authenticated()
 				.and()
