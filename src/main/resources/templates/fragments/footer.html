@@ -3,7 +3,18 @@
 <body>
 <footer class="footer" data-layout-fragment="footer">
 	<div class="container" th:inline="text">
-  		<p class="text-muted">kAmOrU. All rights reserved. <a target="_blank" href="http://ko.wikipedia.org/wiki/%ED%95%9C%EB%9F%89">[[#{home.i.want}]]</a></p>
+  		<span class="text-muted">kAmOrU. All rights reserved. <a target="_blank" href="http://ko.wikipedia.org/wiki/%ED%95%9C%EB%9F%89">[[#{home.i.want}]]</a></span>
+  		
+ 		<section style="float:right; font-size:10px; margin-top: 7px;">
+			<form name="langChange"><span th:text="${#locale}"></span>
+				<select name="lang" onchange="document.forms['langChange'].submit();">
+					<option value="ko" th:selected="${#locale.language}=='ko'" th:text="#{locale.korean.text}">default.korean</option>
+					<option value="en" th:selected="${#locale.language}=='en'" th:text="#{locale.english.text}">default.english</option>
+					<option value="ja" th:selected="${#locale.language}=='ja'" th:text="#{locale.japanese.text}">default.japanese</option>
+				</select>
+			</form>
+		</section>
+ 		
 	</div>
 </footer>
 </body>
