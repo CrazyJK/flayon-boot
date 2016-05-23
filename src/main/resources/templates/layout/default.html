@@ -28,7 +28,7 @@ $(document).ready(function() {
 	</header>
 	
 	<section data-layout-fragment="content" class="container">
-		<p th:text="${'Hello ' + name + '!'}"></p>
+		<p>Hello <span sec:authentication="name">name</span>!</p>
 		<p>This is default main content with default layout</p>
 	</section>
 	

@@ -3,6 +3,7 @@
 <body>
 
 <nav class="navbar navbar-default navbar-fixed-top" data-layout-fragment="header">
+
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -19,7 +20,7 @@
         <li sec:authorize="isAuthenticated()"><a th:href="@{/image}">Picture</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li sec:authorize="!isAuthenticated()"><a href="/login">Login</a></li>
+        <li sec:authorize="!isAuthenticated()"><a class="btn" th:href="@{/login}" id="loginBtn">Login</a></li>
         <li class="dropdown" sec:authorize="isAuthenticated()">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
             Utility
@@ -54,6 +55,7 @@
       </ul>
     </div><!--/.nav-collapse -->
   </div>
+  
 </nav>
 
 </body>
