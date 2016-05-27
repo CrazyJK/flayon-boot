@@ -12,44 +12,51 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" th:href="@{/}">Flayon</a>
+      <a class="navbar-brand" th:href="@{/}"><span class="glyphicon glyphicon-home"></span> Flayon</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li sec:authorize="isAuthenticated()"><a th:href="@{/video}">Video</a></li>
-        <li sec:authorize="isAuthenticated()"><a th:href="@{/image}">Picture</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/video}"><span class="glyphicon glyphicon-film"></span> Video</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/image}"><span class="glyphicon glyphicon-picture"></span> Picture</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li sec:authorize="!isAuthenticated()"><a class="btn" th:href="@{/login}" id="loginBtn">Login</a></li>
+        <li sec:authorize="!isAuthenticated()">
+        	<a class="btn" th:href="@{/login}" id="loginBtn">
+        		<span class="glyphicon glyphicon-log-in"></span> 
+        		Login
+        	</a>
+        </li>
         <li class="dropdown" sec:authorize="isAuthenticated()">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            <span class="glyphicon glyphicon-wrench"></span>
             Utility
             <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li class="dropdown-header">Management</li>
-            <li><a th:href="@{/flayon/requestMappingList}">Request Mapping</a></li>
-            <li><a th:href="@{/flayon/memory}">Memory</a></li>
-            <li><a th:href="@{/flayon/threaddump}">Thread dump</a></li>
-            <li><a th:href="@{/flayon/webcontext}">Web attribute</a></li>
-            <li><a th:href="@{/flayon/error}">Error</a></li>
+            <li class="dropdown-header"><span class="glyphicon glyphicon-tag"></span> Management</li>
+            <li><a th:href="@{/flayon/requestMappingList}"><span class="glyphicon glyphicon-leaf"></span> Request Mapping</a></li>
+            <li><a th:href="@{/flayon/memory}"><span class="glyphicon glyphicon-leaf"></span> Memory</a></li>
+            <li><a th:href="@{/flayon/threaddump}"><span class="glyphicon glyphicon-leaf"></span> Thread dump</a></li>
+            <li><a th:href="@{/flayon/webcontext}"><span class="glyphicon glyphicon-leaf"></span> Web attribute</a></li>
+            <li><a th:href="@{/flayon/error}"><span class="glyphicon glyphicon-leaf"></span> Error</a></li>
             <li class="divider"></li>
-            <li class="dropdown-header">Utility</li>
-            <li><a th:href="@{/flayon/colors}">Standard color</a></li>
-            <li><a th:href="@{/flayon/portscan}">Port scan</a></li>
-            <li><a th:href="@{/flayon/logviewt}">Log view</a></li>
+            <li class="dropdown-header"><span class="glyphicon glyphicon-tag"></span> Utility</li>
+            <li><a th:href="@{/flayon/colors}"><span class="glyphicon glyphicon-leaf"></span> Standard color</a></li>
+            <li><a th:href="@{/flayon/portscan}"><span class="glyphicon glyphicon-leaf"></span> Port scan</a></li>
+            <li><a th:href="@{/flayon/logviewt}"><span class="glyphicon glyphicon-leaf"></span> Log view</a></li>
           </ul>
         </li>
         <li class="dropdown" sec:authorize="isAuthenticated()">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            <span class="glyphicon glyphicon-user"></span>
             <span sec:authentication="name">Username</span>
             <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a th:href="@{/user/profile}">User Profile</a></li>
-            <li><a data-th-href="@{/logout}">Log out</a></li>
+            <li><a th:href="@{/user/profile}"><span class="glyphicon glyphicon-user"></span> User Profile</a></li>
+            <li><a data-th-href="@{/logout}"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
             <li class="divider" sec:authorize="hasAuthority('ADMIN')"></li>
-            <li class="dropdown-header" sec:authorize="hasAuthority('ADMIN')">admin menu</li>
-            <li><a data-th-href="@{/user}" sec:authorize="hasAuthority('ADMIN')">Users</a></li>
-            <li><a data-th-href="@{/h2console}" target="_blank" sec:authorize="hasAuthority('ADMIN')">H2 Console</a></li>
+            <li class="dropdown-header" sec:authorize="hasAuthority('ADMIN')"><span class="glyphicon glyphicon-lock"></span> admin menu</li>
+            <li><a data-th-href="@{/user}" sec:authorize="hasAuthority('ADMIN')"><span class="glyphicon glyphicon-list"></span> Users</a></li>
+            <li><a data-th-href="@{/h2console}" target="_blank" sec:authorize="hasAuthority('ADMIN')"><span class="glyphicon glyphicon-new-window"></span> H2 Console</a></li>
           </ul>
         </li>
       </ul>
