@@ -50,6 +50,7 @@ public class HandlerAccessLogger implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+		log.debug("preHandle");
 		startTime = System.currentTimeMillis();
 		if (when == WHEN.PRE)
 			log.info("pre : {}", getAccesslog(request, response, handler, null, null));
@@ -58,14 +59,17 @@ public class HandlerAccessLogger implements HandlerInterceptor {
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+		log.debug("postHandle");
 		if (when == WHEN.POST)
 			log.info("post : {}", getAccesslog(request, response, handler, modelAndView, null));
 	}
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+		log.debug("afterCompletion START");
 		if (when == WHEN.AFTER)
 			log.info("{}", getAccesslog(request, response, handler, null, ex));
+		log.debug("afterCompletion END");
 	}
 
 	private String getAccesslog(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView, Exception ex) {
