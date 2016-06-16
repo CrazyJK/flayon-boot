@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.method.HandlerMethod;
@@ -271,6 +272,9 @@ class ThreadParamInfo {
 	private String state;
 	private long threadId;
 
+	public boolean hasAnyValue() {
+		return StringUtils.hasLength(name) || StringUtils.hasLength(state) || threadId > 0;
+	}
 }
 
 class Utils {

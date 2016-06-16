@@ -5,7 +5,7 @@
 
 	<groupId>jk.kamoru</groupId>
 	<artifactId>flayon-boot</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<packaging>jar</packaging>
 
 	<name>flayon boot</name>
@@ -42,17 +42,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-        <!-- for war packaging. remove comment and change war in packaging -->
-		<!-- <dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency> -->
-		<!-- <dependency>
-        	<groupId>org.springframework.boot</groupId>
-        	<artifactId>spring-boot-devtools</artifactId>
-        	<optional>true</optional>
-    	</dependency> -->
     
 		<!-- lombok -->
 		<dependency>
@@ -61,18 +50,7 @@
 			<version>1.16.6</version>
 		</dependency>
 
-		<!-- jsp
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-jasper</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		 -->			
-		<!-- Thymeleaf --> 
+		<!-- Thymeleaf 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -80,20 +58,15 @@
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
-		</dependency>		 
+		</dependency>
+		 -->
+				 
 		 <!-- H2 -->
 		 <dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- mysql connector -->
-		<!-- 
-		<dependency>
-        	<groupId>mysql</groupId>
-         	<artifactId>mysql-connector-java</artifactId>
-		</dependency>
-		 -->
 	
 		<!-- webjars -->
 		<dependency>
@@ -116,6 +89,33 @@
     		<artifactId>angular-animate</artifactId>
     		<version>1.5.6</version>
 		</dependency>
+
+		<!-- SiteMesh 3 -->
+		<dependency>
+		    <groupId>org.sitemesh</groupId>
+		    <artifactId>sitemesh</artifactId>
+		    <version>3.0.1</version>
+		</dependency>
+		<!-- JSTL -->
+  		<dependency>
+      		<groupId>javax.servlet</groupId>
+      		<artifactId>jstl</artifactId>
+  		</dependency>
+  		<!-- servlet tagsupport -->
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
+		<!-- security-taglibs -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+		</dependency>  
 
 	</dependencies>
 
