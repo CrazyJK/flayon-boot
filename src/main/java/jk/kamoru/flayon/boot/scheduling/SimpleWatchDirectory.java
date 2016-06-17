@@ -16,7 +16,6 @@ import java.util.concurrent.Future;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
-import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,18 +27,20 @@ import lombok.extern.slf4j.Slf4j;
  *   <code>@</code>EnableAsync
  *   public class FlayOnApplication {
  *   ...
+ *   <code>@</code>Bean MethodExecutionBeanPostProcessor 설정필! 
  * </pre>
  * @author kamoru
  *
  */
-@Component
 @Slf4j
-public class AsyncWatchDirectorySample {
+public abstract class SimpleWatchDirectory {
 
+	protected abstract String getPath();
+	
 	@Async
 	public Future<Object> start() throws IOException {
 		WatchService watcher = FileSystems.getDefault().newWatchService();
-		Path path = Paths.get(".");
+		Path path = Paths.get(getPath());
 		log.info("Start watch service : {}", path.toAbsolutePath());
 		path.register(watcher, ENTRY_CREATE, ENTRY_DELETE, ENTRY_MODIFY);
 		

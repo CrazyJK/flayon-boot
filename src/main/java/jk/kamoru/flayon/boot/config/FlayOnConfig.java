@@ -19,7 +19,7 @@ public class FlayOnConfig {
 	public BeanPostProcessor methodExecutionBeanPostProcessor() {
 		MethodExecutionBeanPostProcessor processor = new MethodExecutionBeanPostProcessor();
 		Map<String, String> beans = new HashMap<>();
-		beans.put("asyncWatchDirectorySample", "start");
+		beans.put("infoWatch", "start");
 		beans.put("methodExecutionSample", "loadInitData");
 		
 		processor.setBeans(beans);

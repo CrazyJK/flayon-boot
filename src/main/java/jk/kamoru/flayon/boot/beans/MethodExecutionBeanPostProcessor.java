@@ -56,7 +56,7 @@ public class MethodExecutionBeanPostProcessor implements BeanPostProcessor {
 			return bean;
 		if (beans.keySet().contains(beanName)) {
 			String methodName = beans.get(beanName);
-			log.info("BeanPostProcess {} attempt to invoke {}.{}", ++count, beanName, methodName);
+			log.info("BeanPostProcess {}   attempt to invoke {}.{}", ++count, beanName, methodName);
 
 			try {
 				Method method = bean.getClass().getDeclaredMethod(methodName);
