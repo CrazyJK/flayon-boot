@@ -99,8 +99,9 @@ public class UserController {
 
 	@RequestMapping("/profile")
 	public String profile(Model model, @AuthenticationPrincipal FlayOnUser flayonUser) {
-		log.debug("profile userdetails {}", flayonUser); 
-		model.addAttribute(flayonUser.getUser());
+		if (log.isDebugEnabled())
+			log.debug("profile userdetails {}", flayonUser);
+		model.addAttribute(userRepository.getOne(flayonUser.getUser().getId()));
 		return ProfileView;
 	}
 	
