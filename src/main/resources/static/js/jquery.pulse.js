@@ -26,8 +26,7 @@
 		return this.each(function() {
 			// Pulse 기능이 시작된다.
 			for (var i = 0; i < opts.pulses; i++) {
-				$(this).fadeTo(opts.speed, opts.fadeLow).fadeTo(opts.speed,
-						opts.fadeHigh);
+				$(this).fadeTo(opts.speed, opts.fadeLow).fadeTo(opts.speed, opts.fadeHigh);
 			}
 			// 원래의 상태로 재설정한다.
 			$(this).fadeTo(opts.speed, 1);
