@@ -1,5 +1,7 @@
 @CHARSET "UTF-8";
 .typed-cursor {
+	font-weight: bold;
+	color: red;
     opacity: 1;
     -webkit-animation: blink 0.7s infinite;
     -moz-animation: blink 0.7s infinite;

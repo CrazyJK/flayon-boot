@@ -89,6 +89,11 @@
     		<artifactId>angular-animate</artifactId>
     		<version>1.5.6</version>
 		</dependency>
+		<dependency>
+    		<groupId>org.webjars.bower</groupId>
+    		<artifactId>datatables</artifactId>
+    		<version>1.10.12</version>
+		</dependency>
 
 		<!-- SiteMesh 3 -->
 		<dependency>
