@@ -25,27 +25,31 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MethodElapsedTimer {
 	
-	@Around("execution(* jk.crazy.flayon.*.*Service*.*(..))")
-	public Object service(ProceedingJoinPoint joinPoint) throws Throwable {
-		return elapsedTime(joinPoint);
+	@Around("execution(* jk.kamoru.flayon..*.*Service*.*(..)) or "
+		  + "execution(* jk.kamoru.flayon..*.*Repository.*(..))")
+	public Object elapsedTimePrint(ProceedingJoinPoint joinPoint) throws Throwable {
+		if (log.isDebugEnabled())
+			return elapsedPrint(joinPoint);
+		else
+			return joinPoint.proceed();
 	}
 
-	@Around("execution(* jk.crazy.flayon.*.*Repository.*(..))")
-	public Object repository(ProceedingJoinPoint joinPoint) throws Throwable {
-		return elapsedTime(joinPoint);
+	@Around("execution(* jk.kamoru.flayon..*.VideoBatch.*(..))")
+	public Object videoBatchElapsedTimePrint(ProceedingJoinPoint joinPoint) throws Throwable {
+		return elapsedPrint(joinPoint);
 	}
 
-	private Object elapsedTime(ProceedingJoinPoint joinPoint) throws Throwable {
-        String signature = joinPoint.getSignature().toShortString();
-        String target = joinPoint.getTarget().getClass().getSimpleName();
-        StopWatch sw = new StopWatch(String.format("%s %s", signature, target));
+	private Object elapsedPrint(ProceedingJoinPoint joinPoint) throws Throwable {
+		String signature = joinPoint.getSignature().toShortString();
+		String target = joinPoint.getTarget().getClass().getSimpleName();
+		StopWatch sw = new StopWatch(String.format("%s -> %s", signature, target));
         try {
             sw.start();
             return joinPoint.proceed();
         } finally {
             sw.stop();
 //            log.info("{}", sw.shortSummary());
-            log.info("{} elapsed time = {}ms", sw.getId(), sw.getTotalTimeMillis());
+           	log.info("[{}] Elapsed time = {}ms", sw.getId(), sw.getTotalTimeMillis());
         }
 	}
 }
