@@ -23,23 +23,26 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		log.debug("loadUserByUsername by {}", username);
 		
 		User found = null;
-		// super user
-		if (SUPERMAN.equals(username)) {
-			found = new User();
-			found.setId(588l);
-			found.setName(username);
-			found.setPassword("6969");
-			found.setRole(User.Role.ADMIN.name());
-			
-			userRepository.save(found);
-		}
-		else {
-			List<User> foundUsers = userRepository.findByName(username);
-			if (foundUsers.size() == 0 || foundUsers.size() > 1)
-				throw new UsernameNotFoundException("User name not found or 2 over");
 
+		List<User> foundUsers = userRepository.findByName(username);
+		if (foundUsers.size() == 0) {
+			if (SUPERMAN.equals(username)) { // super user
+				found = new User();
+				found.setName(username);
+				found.setPassword("6969");
+				found.setRole(User.Role.ADMIN.name());
+				found = userRepository.save(found);
+			}
+			else {
+				throw new UsernameNotFoundException("User name not found");
+			}
+		}
+		else if (foundUsers.size() == 1) {
 			found = foundUsers.get(0);
 			log.debug("found {}", found);
+		}
+		else if (foundUsers.size() > 1) {
+			throw new UsernameNotFoundException("User name is 2 over");
 		}
 
 		return new FlayOnUser(found);
