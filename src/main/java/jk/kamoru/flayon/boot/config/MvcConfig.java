@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -20,11 +21,14 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import jk.kamoru.flayon.boot.aop.AccessLogRepository;
 import jk.kamoru.flayon.boot.aop.HandlerAccessLogger;
 import jk.kamoru.flayon.boot.aop.HandlerAccessLogger.WHEN;
 
 @Configuration
 public class MvcConfig extends WebMvcConfigurerAdapter {
+
+	@Autowired AccessLogRepository accessLogRepository;
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
@@ -35,7 +39,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new HandlerAccessLogger().setWhen(WHEN.AFTER));
+		registry.addInterceptor(new HandlerAccessLogger().setWhen(WHEN.AFTER).setRepository(accessLogRepository));
 		registry.addInterceptor(localeChangeInterceptor());
 	}
 

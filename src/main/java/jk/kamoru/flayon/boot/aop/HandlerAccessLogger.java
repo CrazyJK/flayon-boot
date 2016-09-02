@@ -5,12 +5,15 @@ import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.Id;
 import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -28,6 +31,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class HandlerAccessLogger implements HandlerInterceptor {
 
+	@Autowired AccessLogRepository accessLogRepository;
+	
 	private long startTime;
 	
 	/**
@@ -114,6 +119,50 @@ public class HandlerAccessLogger implements HandlerInterceptor {
 				modelAndViewInfo
 				);
 
+		accessLogRepository.save(new AccessLog(
+				request.getRemoteAddr(),
+				request.getMethod(), 
+				request.getRequestURI(),
+				StringUtils.trimWhitespace(response.getContentType()), 
+				elapsedtime,
+				handlerlInfo,
+				exceptionInfo,
+				modelAndViewInfo));
+		
 		return accesslog;
 	}
+
+	public HandlerInterceptor setRepository(AccessLogRepository accessLogRepository) {
+		this.accessLogRepository = accessLogRepository;
+		return this;
+	}
+}
+
+@Data
+class AccessLog {
+    @Id
+    public String id;
+    public String remoteAddr;
+    public String method;
+    public String requestURI;
+    public String contentType;
+    public long elapsedTime;
+    public String handlerInfo;
+    public String exceptionInfo;
+    public String modelAndViewInfo;
+    
+	public AccessLog(String remoteAddr, String method, String requestURI, String contentType, long elapsedTime,
+			String handlerInfo, String exceptionInfo, String modelAndViewInfo) {
+		super();
+		this.remoteAddr = remoteAddr;
+		this.method = method;
+		this.requestURI = requestURI;
+		this.contentType = contentType;
+		this.elapsedTime = elapsedTime;
+		this.handlerInfo = handlerInfo;
+		this.exceptionInfo = exceptionInfo;
+		this.modelAndViewInfo = modelAndViewInfo;
+	}
+    
+    
 }
