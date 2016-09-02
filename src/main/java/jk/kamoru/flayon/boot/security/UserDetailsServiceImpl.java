@@ -30,6 +30,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			found.setName(username);
 			found.setPassword("6969");
 			found.setRole(User.Role.ADMIN.name());
+			
+			userRepository.save(found);
 		}
 		else {
 			List<User> foundUsers = userRepository.findByName(username);
