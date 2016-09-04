@@ -31,6 +31,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
+import jk.kamoru.flayon.boot.aop.AccessLogRepository;
 import jk.kamoru.flayon.boot.error.FlayOnException;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +43,8 @@ public class FlayOnController {
 
 	@Autowired
 	private ApplicationContext context;
+	
+	@Autowired AccessLogRepository accessLogRepository;
 	
 	@RequestMapping(value = "/requestMappingList")
 	public String requestMapping(Model model, @RequestParam(value="sort", required=false, defaultValue="P") final String sort) {
@@ -263,6 +266,12 @@ public class FlayOnController {
 		return "flayon/logView";
 	}
 
+	@RequestMapping("/accesslog")
+	public String accesslog(Model model) {
+		model.addAttribute(accessLogRepository.findAll());
+		return "flayon/accesslog";
+	}
+	
 }
 
 @Data
