@@ -83,7 +83,7 @@ public class HandlerAccessLogger implements HandlerInterceptor {
 		// for Controller
 		if (handler instanceof org.springframework.web.method.HandlerMethod) {
 			HandlerMethod method = (HandlerMethod) handler;
-			handlerlInfo = String.format("[%s.%s]", method.getBean().getClass().getSimpleName(), method.getMethod().getName());
+			handlerlInfo = String.format("%s.%s", method.getBean().getClass().getSimpleName(), method.getMethod().getName());
 		} 
 		// for static resources. No additional information
 		else if (handler instanceof ResourceHttpRequestHandler) {
@@ -91,7 +91,7 @@ public class HandlerAccessLogger implements HandlerInterceptor {
 		}
 		// another handler 
 		else {
-			handlerlInfo = String.format("[%s]", handler);
+			handlerlInfo = String.format("%s", handler);
 		}
 
 		// for modelAndView
@@ -107,7 +107,7 @@ public class HandlerAccessLogger implements HandlerInterceptor {
 			exceptionInfo = "Error : " + ex.getMessage();
 		}
 		
-		String accesslog = String.format("[%s] %s %s %s %sms %s %s %s", 
+		String accesslog = String.format("[%s] %s %s %s %sms [%s] %s %s", 
 				request.getRemoteAddr(), 
 				request.getMethod(), 
 				request.getRequestURI(),

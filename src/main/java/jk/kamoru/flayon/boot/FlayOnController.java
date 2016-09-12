@@ -22,6 +22,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -267,8 +270,8 @@ public class FlayOnController {
 	}
 
 	@RequestMapping("/accesslog")
-	public String accesslog(Model model) {
-		model.addAttribute(accessLogRepository.findAll());
+	public String accesslog(Model model, @PageableDefault(sort = { "id" }, direction = Direction.DESC, size = 15) Pageable pageable) {
+		model.addAttribute(accessLogRepository.findAll(pageable));
 		return "flayon/accesslog";
 	}
 	
