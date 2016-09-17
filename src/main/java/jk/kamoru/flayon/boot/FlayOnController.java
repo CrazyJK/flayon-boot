@@ -1,6 +1,7 @@
 package jk.kamoru.flayon.boot;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.Thread.State;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
@@ -25,11 +26,13 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
@@ -38,7 +41,6 @@ import jk.kamoru.flayon.boot.aop.AccessLogRepository;
 import jk.kamoru.flayon.boot.error.FlayOnException;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-
 @Controller
 @Slf4j
 @RequestMapping("/flayon")
@@ -275,6 +277,23 @@ public class FlayOnController {
 		return "flayon/accesslog";
 	}
 	
+	// TODO
+	@RequestMapping("/exec")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void execCommand(@RequestParam(value="cmd") String cmd, 
+			@RequestParam(value="args", required=false, defaultValue="") final String args) {
+		log.info("cmd={}, args={}", cmd, args);
+		Utils.exec(new String[]{cmd, args});
+	}
+	
+	@RequestMapping("/openFolder")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void openFolder(@RequestParam(value="folder") String folder) {
+		folder = StringUtils.replace(folder, "/", System.getProperty("file.separator"));
+		log.info("open folder={}", folder);
+		Utils.exec(new String[]{"explorer", folder});
+	}
+	
 }
 
 @Data
@@ -317,6 +336,14 @@ class Utils {
 		return lineArrayList;
 	}
 	
+	public static void exec(String[] command) {
+		try {
+			Runtime.getRuntime().exec(command);
+		} catch (IOException e) {
+			throw new FlayOnException("execute error", e);
+		}
+	}
+
 	static String replaceEach(String text, String[] searchList, String[] replacementList, boolean repeat, int timeToLive) {
 
         // mchyzer Performance note: This creates very few new objects (one major goal)
