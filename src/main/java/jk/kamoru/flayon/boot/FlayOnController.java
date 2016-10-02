@@ -277,7 +277,6 @@ public class FlayOnController {
 		return "flayon/accesslog";
 	}
 	
-	// TODO
 	@RequestMapping("/exec")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void execCommand(@RequestParam(value="cmd") String cmd, 
