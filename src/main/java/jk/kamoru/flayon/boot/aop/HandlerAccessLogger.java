@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -31,6 +32,8 @@ import lombok.extern.slf4j.Slf4j;
 public class HandlerAccessLogger implements HandlerInterceptor {
 
 	@Autowired AccessLogRepository accessLogRepository;
+	
+	@Value("${use.repository.accesslog}") boolean useAccesslogRepository;
 	
 	private long startTime;
 	
@@ -118,7 +121,8 @@ public class HandlerAccessLogger implements HandlerInterceptor {
 				modelAndViewInfo
 				);
 
-		accessLogRepository.save(new AccessLog(
+		if (useAccesslogRepository)
+			accessLogRepository.save(new AccessLog(
 				new Date(),
 				request.getRemoteAddr(),
 				request.getMethod(), 
