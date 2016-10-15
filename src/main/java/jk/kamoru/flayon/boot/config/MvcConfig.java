@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -29,6 +30,7 @@ import jk.kamoru.flayon.boot.aop.HandlerAccessLogger.WHEN;
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
 	@Autowired AccessLogRepository accessLogRepository;
+	@Value("${use.repository.accesslog}") boolean useAccesslogRepository;
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
@@ -39,13 +41,13 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new HandlerAccessLogger().setWhen(WHEN.AFTER).setRepository(accessLogRepository));
+		registry.addInterceptor(new HandlerAccessLogger().setWhen(WHEN.AFTER).setRepository(accessLogRepository, useAccesslogRepository));
 		registry.addInterceptor(localeChangeInterceptor());
 	}
 
 	@Bean
 	public LocaleChangeInterceptor localeChangeInterceptor(){
-		LocaleChangeInterceptor localeChangeInterceptor=new LocaleChangeInterceptor();
+		LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
 		//request로 넘어오는 language parameter를 받아서 locale로 설정 한다.
 		localeChangeInterceptor.setParamName("lang");
 		return localeChangeInterceptor;

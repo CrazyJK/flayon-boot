@@ -6,8 +6,6 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -31,9 +29,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class HandlerAccessLogger implements HandlerInterceptor {
 
-	@Autowired AccessLogRepository accessLogRepository;
-	
-	@Value("${use.repository.accesslog}") boolean useAccesslogRepository;
+	private AccessLogRepository accessLogRepository;
+	private boolean useAccesslogRepository;
 	
 	private long startTime;
 	
@@ -55,6 +52,19 @@ public class HandlerAccessLogger implements HandlerInterceptor {
 		return this;
 	}
 
+	/**
+	 * 엑세스 로그 repository 설정
+	 * @param accessLogRepository repository
+	 * @param useAccesslogRepository 사용여부
+	 * @return
+	 */
+	public HandlerInterceptor setRepository(AccessLogRepository accessLogRepository, boolean useAccesslogRepository) {
+		this.accessLogRepository = accessLogRepository;
+		this.useAccesslogRepository = useAccesslogRepository;
+		log.info("use Accesslog Repository = {}, {}", useAccesslogRepository, accessLogRepository);
+		return this;
+	}
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		log.trace("preHandle");
@@ -136,8 +146,4 @@ public class HandlerAccessLogger implements HandlerInterceptor {
 		return accesslog;
 	}
 
-	public HandlerInterceptor setRepository(AccessLogRepository accessLogRepository) {
-		this.accessLogRepository = accessLogRepository;
-		return this;
-	}
 }
