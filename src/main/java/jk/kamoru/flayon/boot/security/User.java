@@ -38,4 +38,9 @@ public class User implements Serializable {
 	enum Role {
 		USER, ADMIN;
 	}
+
+	public String toNameCard() {
+		return id + " / " + name;
+	}
+	
 }

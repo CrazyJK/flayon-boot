@@ -6,12 +6,16 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.core.context.SecurityContextImpl;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
+import jk.kamoru.flayon.boot.security.FlayOnUser;
+import jk.kamoru.flayon.boot.security.User;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -120,8 +124,17 @@ public class HandlerAccessLogger implements HandlerInterceptor {
 			exceptionInfo = "Error : " + ex.getMessage();
 		}
 		
-		String accesslog = String.format("[%s] %s %s %s %sms [%s] %s %s", 
+		// user
+		User user = null;
+		SecurityContextImpl securityContext = (SecurityContextImpl) request.getSession().getAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY);
+		if (securityContext != null) {
+			FlayOnUser flayOnUser = (FlayOnUser)securityContext.getAuthentication().getPrincipal();
+			user = flayOnUser.getUser();
+		}
+		
+		String accesslog = String.format("[%s] [%s] %s %s %s %sms [%s] %s %s", 
 				request.getRemoteAddr(), 
+				user == null ? "" : user.toNameCard(),
 				request.getMethod(), 
 				request.getRequestURI(),
 				StringUtils.trimWhitespace(response.getContentType()), 
@@ -141,7 +154,8 @@ public class HandlerAccessLogger implements HandlerInterceptor {
 				elapsedtime,
 				handlerlInfo,
 				exceptionInfo,
-				modelAndViewInfo));
+				modelAndViewInfo,
+				user));
 		
 		return accesslog;
 	}

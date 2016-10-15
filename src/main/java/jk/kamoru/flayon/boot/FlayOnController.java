@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
@@ -37,6 +38,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
+import jk.kamoru.flayon.boot.aop.AccessLog;
 import jk.kamoru.flayon.boot.aop.AccessLogRepository;
 import jk.kamoru.flayon.boot.error.FlayOnException;
 import lombok.Data;
@@ -272,8 +274,22 @@ public class FlayOnController {
 	}
 
 	@RequestMapping("/accesslog")
-	public String accesslog(Model model, @PageableDefault(sort = { "id" }, direction = Direction.DESC, size = 15) Pageable pageable) {
-		model.addAttribute(accessLogRepository.findAll(pageable));
+	public String accesslog(Model model, 
+			@PageableDefault(sort = { "id" }, direction = Direction.DESC, size = 15) Pageable pageable,
+			@RequestParam(value="remoteAddr", required=false, defaultValue="") String remoteAddr, 
+			@RequestParam(value="requestURI", required=false, defaultValue="") String requestURI) {
+		log.info("remoteAddr [{}], requestURI [{}], {}", remoteAddr, requestURI, pageable);
+
+		Page<AccessLog> page = null;
+		if (!StringUtils.isEmpty(requestURI) || !StringUtils.isEmpty(remoteAddr)) {
+			page = accessLogRepository.findByRequestURILikeAndRemoteAddrLike(requestURI, remoteAddr, pageable);
+			log.info("findByCondition {}", page.getContent().size());
+		}
+		else {
+			page = accessLogRepository.findAll(pageable);
+			log.info("findAll {}", page.getContent().size());
+		}
+		model.addAttribute(page);
 		return "flayon/accesslog";
 	}
 	
