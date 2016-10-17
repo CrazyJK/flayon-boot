@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -179,8 +180,11 @@ public class FlayOnController {
 		return "flayon/portscan";
 	}
 	
+	@Autowired private Environment environment;
+
 	@RequestMapping("/webcontext")
-	public String webContext() {
+	public String webContext(Model model) {
+		model.addAttribute("profiles", environment.getActiveProfiles());
 		return "flayon/webContext";
 	}
 	
