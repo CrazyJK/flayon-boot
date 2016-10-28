@@ -51,6 +51,7 @@
 		</dependency>
 
 		<!-- Thymeleaf 
+		 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -59,7 +60,6 @@
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
 		</dependency>
-		 -->
 				 
 		 <!-- H2 -->
 		 <dependency>
