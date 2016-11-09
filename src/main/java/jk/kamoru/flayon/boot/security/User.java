@@ -40,7 +40,7 @@ public class User implements Serializable {
 	}
 
 	public String toNameCard() {
-		return id + " / " + name;
+		return name + "(" + id + ")";
 	}
 	
 }
