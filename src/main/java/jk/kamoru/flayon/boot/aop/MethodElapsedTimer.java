@@ -48,8 +48,7 @@ public class MethodElapsedTimer {
             return joinPoint.proceed();
         } finally {
             sw.stop();
-//            log.info("{}", sw.shortSummary());
-           	log.info("[{}] Elapsed time = {}ms", sw.getId(), sw.getTotalTimeMillis());
+           	log.debug("[{}] Elapsed time = {}ms", sw.getId(), sw.getTotalTimeMillis());
         }
 	}
 }

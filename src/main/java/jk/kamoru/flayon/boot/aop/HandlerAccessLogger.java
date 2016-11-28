@@ -65,7 +65,7 @@ public class HandlerAccessLogger implements HandlerInterceptor {
 	public HandlerInterceptor setRepository(AccessLogRepository accessLogRepository, boolean useAccesslogRepository) {
 		this.accessLogRepository = accessLogRepository;
 		this.useAccesslogRepository = useAccesslogRepository;
-		log.info("use Accesslog Repository = {}, {}", useAccesslogRepository, accessLogRepository);
+		log.debug("use Accesslog Repository = {}, {}", useAccesslogRepository, accessLogRepository);
 		return this;
 	}
 	
@@ -74,7 +74,7 @@ public class HandlerAccessLogger implements HandlerInterceptor {
 		log.trace("preHandle");
 		startTime = System.currentTimeMillis();
 		if (when == WHEN.PRE)
-			log.info("pre : {}", getAccesslog(request, response, handler, null, null));
+			log.debug("pre : {}", getAccesslog(request, response, handler, null, null));
 		return true;
 	}
 
@@ -82,14 +82,14 @@ public class HandlerAccessLogger implements HandlerInterceptor {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 		log.trace("postHandle");
 		if (when == WHEN.POST)
-			log.info("post : {}", getAccesslog(request, response, handler, modelAndView, null));
+			log.debug("post : {}", getAccesslog(request, response, handler, modelAndView, null));
 	}
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
 		log.trace("afterCompletion START");
 		if (when == WHEN.AFTER)
-			log.info("{}", getAccesslog(request, response, handler, null, ex));
+			log.debug("{}", getAccesslog(request, response, handler, null, ex));
 		log.trace("afterCompletion END");
 	}
 
@@ -132,20 +132,7 @@ public class HandlerAccessLogger implements HandlerInterceptor {
 			user = flayOnUser.getUser();
 		}
 		
-		String accesslog = String.format("[%s] [%s] %s %s %s %sms [%s] %s %s", 
-				request.getRemoteAddr(), 
-				user == null ? "" : user.toNameCard(),
-				request.getMethod(), 
-				request.getRequestURI(),
-				StringUtils.trimWhitespace(response.getContentType()), 
-				elapsedtime,
-				handlerlInfo,
-				exceptionInfo,
-				modelAndViewInfo
-				);
-
-		if (useAccesslogRepository)
-			accessLogRepository.save(new AccessLog(
+		AccessLog accessLog = new AccessLog(
 				new Date(),
 				request.getRemoteAddr(),
 				request.getMethod(), 
@@ -155,9 +142,12 @@ public class HandlerAccessLogger implements HandlerInterceptor {
 				handlerlInfo,
 				exceptionInfo,
 				modelAndViewInfo,
-				user));
+				user);
+
+		if (useAccesslogRepository)
+			accessLogRepository.save(accessLog);
 		
-		return accesslog;
+		return accessLog.toLogString();
 	}
 
 }
