@@ -22,9 +22,11 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
@@ -243,21 +245,23 @@ public class FlayOnController {
 	@RequestMapping("/logviewt")
 	public String logView(HttpServletRequest request, Model model) {
 		
-		String logpath   = request.getParameter("logpath");
-		String delimeter = request.getParameter("delimeter");
-		String search    = request.getParameter("search");
-		String searchOper= request.getParameter("searchOper");
+		String logpath    = request.getParameter("logpath");
+		String delimeter  = request.getParameter("delimeter");
+		String search     = request.getParameter("search");
+		String searchOper = request.getParameter("searchOper");
+		String deliMax    = request.getParameter("deliMax");
 
 		logpath   = logpath   == null ? "" : logpath.trim();
 		delimeter = delimeter == null ? "" : delimeter;
 		search    = search    == null ? "" : search.trim();
 		searchOper= searchOper== null ? "or" : searchOper;
+		int max = StringUtils.isEmpty(deliMax) ? -1 : Integer.parseInt(deliMax);
 
 		List<String[]> lines = new ArrayList<String[]>();
 		int tdCount = 0;
 		String msg = "";
 		try {
-			lines = Utils.readLines(logpath, delimeter, search, searchOper);
+			lines = Utils.readLines(logpath, delimeter, max, search, searchOper);
 			for (String[] line : lines) {
 				tdCount = line.length > tdCount ? line.length : tdCount;
 			}
@@ -271,11 +275,14 @@ public class FlayOnController {
 		model.addAttribute("msg", msg);
 		model.addAttribute("logpath", logpath);
 		model.addAttribute("delimeter", delimeter);
+		model.addAttribute("deliMax", deliMax);
 		model.addAttribute("search", search);
 		model.addAttribute("searchOper", searchOper);
 
 		return "flayon/logView";
 	}
+
+	@Value("${use.repository.accesslog}") boolean useAccesslogRepository;
 
 	@RequestMapping("/accesslog")
 	public String accesslog(Model model, 
@@ -285,15 +292,22 @@ public class FlayOnController {
 		log.info("remoteAddr [{}], requestURI [{}], {}", remoteAddr, requestURI, pageable);
 
 		Page<AccessLog> page = null;
-		if (!StringUtils.isEmpty(requestURI) || !StringUtils.isEmpty(remoteAddr)) {
-			page = accessLogRepository.findByRequestURILikeAndRemoteAddrLike(requestURI, remoteAddr, pageable);
-			log.info("findByCondition {}", page.getContent().size());
+		if (useAccesslogRepository) {
+			if (!StringUtils.isEmpty(requestURI) || !StringUtils.isEmpty(remoteAddr)) {
+				page = accessLogRepository.findByRequestURILikeAndRemoteAddrLike(requestURI, remoteAddr, pageable);
+				log.info("findByCondition {}", page.getContent().size());
+			}
+			else {
+				page = accessLogRepository.findAll(pageable);
+				log.info("findAll {}", page.getContent().size());
+			}
 		}
 		else {
-			page = accessLogRepository.findAll(pageable);
-			log.info("findAll {}", page.getContent().size());
+			page = new PageImpl<AccessLog>(new ArrayList<AccessLog>());
 		}
 		model.addAttribute(page);
+		model.addAttribute("useAccesslogRepository", useAccesslogRepository);
+
 		return "flayon/accesslog";
 	}
 	
@@ -327,9 +341,11 @@ class ThreadParamInfo {
 	}
 }
 
+@Slf4j
 class Utils {
 
-	static List<String[]> readLines(String logpath, String delimeter, String search, String searchOper) throws Exception {
+	static List<String[]> readLines(String logpath, String delimeter, int max, String search, String searchOper) throws Exception {
+		
 		if (logpath.length() == 0)
 			throw new Exception("log path is empty");
 		File file = new File(logpath);
@@ -341,17 +357,17 @@ class Utils {
 		List<String[]> lineArrayList = new ArrayList<String[]>();
 		String[] searchArray = trimArray(splitByWholeSeparatorWorker(search, ",", -1, false));
 		int count = 0;
-		System.out.println("logView readLines Start");
+		log.info("logView readLines Start");
 		for (String line : Files.readAllLines(file.toPath())) {
 			if (searchArray.length == 0 || containsAny(line, searchArray, searchOper)) {
 				line = replaceEach(line, new String[]{"<", ">"}, new String[]{"&lt;", "&gt;"}, false, 0);
 				line = replaceEach(line, searchArray, wrapString(searchArray, "<em>", "</em>"), false, 0);
-				lineArrayList.add(delimeter.length() > 0 ? splitByWholeSeparatorWorker(line, delimeter, -1, false) : new String[]{line});
+				lineArrayList.add(delimeter.length() > 0 ? splitByWholeSeparatorWorker(line, delimeter, max, false) : new String[]{line});
 				if (++count % 100 == 0)
-					System.out.println("logView readLines " + count);
+					log.info("logView readLines " + count);
 			}
 		}
-		System.out.println("logView readLines End");
+		log.info("logView readLines End");
 		return lineArrayList;
 	}
 	
