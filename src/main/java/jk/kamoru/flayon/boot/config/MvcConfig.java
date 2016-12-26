@@ -21,6 +21,7 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
+import org.springframework.web.servlet.view.xml.MappingJackson2XmlView;
 
 import jk.kamoru.flayon.boot.aop.AccessLogRepository;
 import jk.kamoru.flayon.boot.aop.HandlerAccessLogger;
@@ -75,14 +76,20 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		
 		List<ViewResolver> resolvers = new ArrayList<ViewResolver>();
 		resolvers.add(new ViewResolver() {
-
 			@Override
 			public View resolveViewName(String viewName, Locale locale) throws Exception {
 				MappingJackson2JsonView view = new MappingJackson2JsonView();
 				view.setPrettyPrint(true); 
 				return view;
 			}
-			
+		});
+		resolvers.add(new ViewResolver() {
+			@Override
+			public View resolveViewName(String viewName, Locale locale) throws Exception {
+				MappingJackson2XmlView view = new MappingJackson2XmlView();
+				view.setPrettyPrint(true); 
+				return view;
+			}
 		});
 
 	    ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
