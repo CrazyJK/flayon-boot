@@ -118,7 +118,8 @@ public class HandlerAccessLogger implements HandlerInterceptor {
 
 		if (useAccesslogRepository)
 			accessLogRepository.save(accessLog);
-		if (contentType != null && contentType.startsWith("image"))
+		
+		if (contentType == null || !contentType.startsWith("image"))
 			log.info(accessLog.toLogString());
 	}
 
