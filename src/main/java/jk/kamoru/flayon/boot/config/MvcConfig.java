@@ -25,7 +25,6 @@ import org.springframework.web.servlet.view.xml.MappingJackson2XmlView;
 
 import jk.kamoru.flayon.boot.aop.AccessLogRepository;
 import jk.kamoru.flayon.boot.aop.HandlerAccessLogger;
-import jk.kamoru.flayon.boot.aop.HandlerAccessLogger.WHEN;
 
 @Configuration
 public class MvcConfig extends WebMvcConfigurerAdapter {
@@ -42,7 +41,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new HandlerAccessLogger().setWhen(WHEN.AFTER).setRepository(accessLogRepository, useAccesslogRepository));
+		registry.addInterceptor(new HandlerAccessLogger().setRepository(accessLogRepository, useAccesslogRepository));
 		registry.addInterceptor(localeChangeInterceptor());
 	}
 

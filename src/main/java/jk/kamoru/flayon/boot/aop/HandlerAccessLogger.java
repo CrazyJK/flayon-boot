@@ -19,12 +19,11 @@ import jk.kamoru.flayon.boot.security.User;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * handler 실행 전, 후, 완료 시점에 accesslog형식으로 로그에 기록한다.
- * <p> 시점은 {@link #setWhen(WHEN)}으로 결정. default {@link WHEN#AFTER}
+ * handler 완료 시점에 accesslog형식으로 로그에 기록한다.
  * <pre>
  *  <code>@</code>Override
  *  public void addInterceptors(InterceptorRegistry registry) {
- *  	registry.addInterceptor(new HandlerAccessLogger().setWhen(WHEN.AFTER));
+ *  	registry.addInterceptor(new HandlerAccessLogger().setRepository(AccessLogRepository accessLogRepository, boolean useAccesslogRepository));
  *  }
  * </pre>
  * @author kamoru
@@ -35,26 +34,6 @@ public class HandlerAccessLogger implements HandlerInterceptor {
 
 	private AccessLogRepository accessLogRepository;
 	private boolean useAccesslogRepository;
-	
-	private long startTime;
-	
-	/**
-	 * {@link #PRE}, {@link #POST}, {@link #AFTER}
-	 * @author kamoru
-	 */
-	public enum WHEN {
-		PRE, POST, AFTER
-	}
-	private WHEN when = WHEN.AFTER;
-	
-	/**
-	 * 로그를 찍을 시점.
-	 * @param when
-	 */
-	public HandlerAccessLogger setWhen(WHEN when) {
-		this.when = when;
-		return this;
-	}
 
 	/**
 	 * 엑세스 로그 repository 설정
@@ -71,29 +50,21 @@ public class HandlerAccessLogger implements HandlerInterceptor {
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		log.trace("preHandle");
-		startTime = System.currentTimeMillis();
-		if (when == WHEN.PRE)
-			log.debug("pre : {}", getAccesslog(request, response, handler, null, null));
+		request.setAttribute("startTime", new Long(System.currentTimeMillis()));
 		return true;
 	}
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-		log.trace("postHandle");
-		if (when == WHEN.POST)
-			log.debug("post : {}", getAccesslog(request, response, handler, modelAndView, null));
 	}
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-		log.trace("afterCompletion START");
-		if (when == WHEN.AFTER)
-			log.debug("{}", getAccesslog(request, response, handler, null, ex));
-		log.trace("afterCompletion END");
+		getAccesslog(request, response, handler, null, ex);
 	}
 
-	private String getAccesslog(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView, Exception ex) {
+	private void getAccesslog(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView, Exception ex) {
+		long startTime = (Long)request.getAttribute("startTime");
 		long elapsedtime = System.currentTimeMillis() - startTime;
 
 		String handlerlInfo = "";
@@ -147,7 +118,7 @@ public class HandlerAccessLogger implements HandlerInterceptor {
 		if (useAccesslogRepository)
 			accessLogRepository.save(accessLog);
 		
-		return accessLog.toLogString();
+		log.info(accessLog.toLogString());
 	}
 
 }
