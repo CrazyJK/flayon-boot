@@ -103,12 +103,13 @@ public class HandlerAccessLogger implements HandlerInterceptor {
 			user = flayOnUser.getUser();
 		}
 		
+		String contentType = response.getContentType();
 		AccessLog accessLog = new AccessLog(
 				new Date(),
 				request.getRemoteAddr(),
 				request.getMethod(), 
 				request.getRequestURI(),
-				StringUtils.trimWhitespace(response.getContentType()), 
+				StringUtils.trimWhitespace(contentType), 
 				elapsedtime,
 				handlerlInfo,
 				exceptionInfo,
@@ -117,7 +118,7 @@ public class HandlerAccessLogger implements HandlerInterceptor {
 
 		if (useAccesslogRepository)
 			accessLogRepository.save(accessLog);
-		if (!accessLog.getContentType().startsWith("image"))
+		if (contentType != null && contentType.startsWith("image"))
 			log.info(accessLog.toLogString());
 	}
 
