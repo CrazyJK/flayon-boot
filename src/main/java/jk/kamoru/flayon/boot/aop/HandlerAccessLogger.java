@@ -117,8 +117,8 @@ public class HandlerAccessLogger implements HandlerInterceptor {
 
 		if (useAccesslogRepository)
 			accessLogRepository.save(accessLog);
-		
-		log.info(accessLog.toLogString());
+		if (!accessLog.getContentType().startsWith("image"))
+			log.info(accessLog.toLogString());
 	}
 
 }

@@ -30,7 +30,7 @@ public class MethodElapsedTimer {
 	static final String REPOSITORY = "execution(* jk.kamoru.flayon..*.*Repository.*(..))";
 	static final String VIDEOBATCH = "execution(* jk.kamoru.flayon..*.VideoBatch.*(..))";
 	
-	@Around(SERVICE + " or " + REPOSITORY)
+//	@Around(SERVICE + " or " + REPOSITORY)
 	public Object elapsedTimePrint(ProceedingJoinPoint joinPoint) throws Throwable {
 		if (log.isDebugEnabled())
 			return elapsedPrint(joinPoint);
@@ -38,10 +38,13 @@ public class MethodElapsedTimer {
 			return joinPoint.proceed();
 	}
 
-//	@Around(VIDEOBATCH)
-//	public Object videoBatchElapsedTimePrint(ProceedingJoinPoint joinPoint) throws Throwable {
-//		return elapsedPrint(joinPoint);
-//	}
+	@Around(VIDEOBATCH)
+	public Object videoBatchElapsedTimePrint(ProceedingJoinPoint joinPoint) throws Throwable {
+		if (log.isDebugEnabled())
+			return elapsedPrint(joinPoint);
+		else
+			return joinPoint.proceed();
+	}
 
 	private Object elapsedPrint(ProceedingJoinPoint joinPoint) throws Throwable {
 		String signature = joinPoint.getSignature().toShortString();
