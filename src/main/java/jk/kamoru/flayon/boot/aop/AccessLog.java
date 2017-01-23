@@ -26,9 +26,10 @@ public class AccessLog implements Serializable {
     public String exceptionInfo;
     public String modelAndViewInfo;
     public User user;
+    public int status;
     
 	public AccessLog(Date accessDate, String remoteAddr, String method, String requestURI, String contentType, long elapsedTime,
-			String handlerInfo, String exceptionInfo, String modelAndViewInfo, User user) {
+			String handlerInfo, String exceptionInfo, String modelAndViewInfo, User user, int status) {
 		super();
 		this.accessDate = accessDate;
 		this.remoteAddr = remoteAddr;
@@ -40,15 +41,17 @@ public class AccessLog implements Serializable {
 		this.exceptionInfo = exceptionInfo;
 		this.modelAndViewInfo = modelAndViewInfo;
 		this.user = user;
+		this.status = status;
 	}
 
 	public String toLogString() {
 		return String.format(
-				"[%s] [%s] %s %s %s %sms [%s] %s %s",
+				"[%s - %s] %s %s %s %s %sms [%s] %s %s",
 				remoteAddr, 
 				user == null ? "" : user.toNameCard(), 
 				method, 
-				requestURI, 
+				status,
+				requestURI,
 				contentType, 
 				elapsedTime, 
 				handlerInfo, 

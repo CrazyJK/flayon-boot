@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import jk.kamoru.flayon.boot.beans.MethodExecutionBeanPostProcessor;
-import jk.kamoru.flayon.boot.vertx.VertxServer;
 
 @Configuration
 public class FlayOnConfig {
@@ -36,8 +35,4 @@ public class FlayOnConfig {
 		return filter;
 	}
 
-	@Bean
-	public VertxServer vertxServer() {
-		return new VertxServer();
-	}
 }

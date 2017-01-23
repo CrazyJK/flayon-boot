@@ -102,24 +102,26 @@ public class HandlerAccessLogger implements HandlerInterceptor {
 			FlayOnUser flayOnUser = (FlayOnUser)securityContext.getAuthentication().getPrincipal();
 			user = flayOnUser.getUser();
 		}
-		
 		String contentType = response.getContentType();
+		String requestUri = request.getRequestURI();
+		int status = response.getStatus();
 		AccessLog accessLog = new AccessLog(
 				new Date(),
 				request.getRemoteAddr(),
 				request.getMethod(), 
-				request.getRequestURI(),
+				requestUri,
 				StringUtils.trimWhitespace(contentType), 
 				elapsedtime,
 				handlerlInfo,
 				exceptionInfo,
 				modelAndViewInfo,
-				user);
+				user,
+				status);
 
 		if (useAccesslogRepository)
 			accessLogRepository.save(accessLog);
 		
-		if (contentType == null || !contentType.startsWith("image"))
+		if (contentType == null || !(contentType.startsWith("image") || requestUri.contains("ping.json")))
 			log.info(accessLog.toLogString());
 	}
 
