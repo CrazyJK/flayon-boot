@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.sitemesh.config.ConfigurableSiteMeshFilter;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.boot.context.embedded.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
